@@ -1,5 +1,12 @@
 import tokenService from './tokenService';
 
+export default {
+  signup,
+  getUser,
+  logout,
+  login
+};
+
 const BASE_URL = '/api/users/';
 
 // user from form -- the state.
@@ -13,6 +20,7 @@ function signup(user) {
     if (res.ok) return res.json();
     throw new Error('E-mail already taken.');
   })
+  // Token is the object returned from the fetch.
   .then(({ token }) => tokenService.setToken(token));
 }
   // equivalent to then((token) => token.token)
@@ -37,10 +45,3 @@ function login(credentials) {
   })
   .then(({ token }) => tokenService.setToken(token));
 }
-
-export default {
-  signup,
-  getUser,
-  logout,
-  login
-};
