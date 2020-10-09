@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import LoginPage from '../LoginPage';
 import SignupPage from '../SignupPage';
 import Dashboard from '../Dashboard';
@@ -26,21 +26,18 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          {/* <Route exact path='/' render={() =>
-            <Dashboard 
-              user={this.state.user}
-              handleLogout={this.handleLogout}
-            />
-          }/> */}
           <Route exact path='/' render={() =>
             <AuthPage />
           }/>
 
           <Route exact path='/dashboard' render={() =>
-            <Dashboard
-              user={this.state.user}
-              handleLogout={this.handleLogout}
-            />
+            userService.getUser() ? 
+              <Dashboard
+                user={this.state.user}
+                handleLogout={this.handleLogout}
+              />
+              :
+              <Redirect to='/' />
           }/>
 
           <Route exact path="/signup" render={({ history }) => 

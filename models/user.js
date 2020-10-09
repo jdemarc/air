@@ -47,7 +47,9 @@ userSchema.pre('save', function(next) {
   });
 });
 
+// Instance method -- callable on the document itself.
 userSchema.methods.comparePassword = function(tryPassword, cb) {
+  // Compare passed password with document's password.
   bcrypt.compare(tryPassword, this.password, cb);
 };
 

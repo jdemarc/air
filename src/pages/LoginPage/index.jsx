@@ -24,6 +24,8 @@ class LoginPage extends Component {
 
       this.props.history.push('/dashboard');
     } catch (error) {
+      // Do not alert.
+      // Show a modal or UI instead.
       alert('Invalid credentials.');
     }
   }
