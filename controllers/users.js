@@ -14,8 +14,10 @@ async function signup(req, res) {
   try {
     await user.save();
 
+    // String
     const token = createJWT(user);
 
+    // Send back an object with property of 'token', value is the string.
     res.json({ token });
   } catch (error) {
     res.status(400).json(error);
@@ -40,11 +42,14 @@ async function login(req, res) {
 }
 
 //------------------------------
+// Functions that do not get exported... helpers
 
 function createJWT(user) {
+  //args: data payload, secret, (options/optional)
   return jwt.sign(
-    {user},
+    { user }, // { user: user }
     SECRET,
-    {expiresIn: '24h'}
+    { expiresIn: '24h' } // Unspecified... forever
+    // Sliding expiration? Refresh token upon login.
   );
 }
