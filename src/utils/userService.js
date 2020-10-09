@@ -1,4 +1,3 @@
-import { token } from 'morgan';
 import tokenService from './tokenService';
 
 const BASE_URL = '/api/users/';
@@ -13,12 +12,9 @@ function signup(user) {
     if (res.ok) return res.json();
     throw new Error('E-mail already taken.');
   })
-  .then(({ token }) => {
-    tokenService.setToken(token);
-
-  });
-  // equivalent to then((token) => token.token)
+  .then(({ token }) => tokenService.setToken(token));
 }
+  // equivalent to then((token) => token.token)
 
 function getUser() {
   return tokenService.getUserFromToken();
@@ -28,8 +24,22 @@ function logout() {
   tokenService.removeToken();
 }
 
+function login(credentials) {
+  return fetch(BASE_URL + 'login', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify(credentials)
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw new Error('Bad credentials.');
+  })
+  .then(({ token }) => tokenService.setToken(token));
+}
+
 export default {
   signup,
   getUser,
-  logout
+  logout,
+  login
 };

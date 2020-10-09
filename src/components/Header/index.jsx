@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import userService from '../../utils/userService';
 
 const Header = (props) => {
-
+  console.log(props)
   let nav = props.user ?
+
     <div>
       <Link to=''
         onClick={props.handleLogout}>
@@ -13,14 +13,23 @@ const Header = (props) => {
       <span>Signed in as {props.user.name} </span>
     </div>
     :
-    <div>
-      <Link to='/login'>Log in</Link>
-      <Link to='/signup'>Sign up</Link>
-    </div>;
+    <ul className="navbar-nav">
+      <li className="nav-item">
+        <Link to='/login'>Log in</Link>
+      </li>
+      <li className="nav-item pl-3">
+        <Link to='/signup'>Sign up</Link>
+      </li>
+    </ul>;
 
   return (
-    <nav className="navbar navbar-light bg-light">
-      {nav}
+    <nav className="navbar navbar-default navbar-expand bg-light">
+      <div className="container">
+        <div className="navbar-header">
+          <span class="navbar-brand">AIR</span>
+        </div>
+          {nav}
+      </div>
     </nav>
   );
 };

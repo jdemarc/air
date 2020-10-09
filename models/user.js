@@ -30,10 +30,14 @@ userSchema.pre('save', function(next) {
   if (!user.isModified('password')) return next();
   
   bcrypt.hash(user.password, SALT_ROUNDS, function(err, hash) {
-    if (error) return next(error);
+    if (err) return next(err);
     user.password = hash;
     next();
   });
 });
+
+userSchema.methods.comparePassword = function(tryPassword, cb) {
+  bcrypt.compare(tryPassword, this.password, cb);
+};
 
 module.exports = mongoose.model('User', userSchema);

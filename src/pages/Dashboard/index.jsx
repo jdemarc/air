@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header';
 
-class Dashboard extends Component {
-  render() {
-    return (
-      <div>
-        <Header />
+const Dashboard = (props) => {
+  return (
+    <div>
+      <Header
+        user={props.user}
+        handleLogout={props.handleLogout}
+      />
+    
         Living in the dash.
-      </div>
-    )
-  }
+    </div>
+  )
 };
 
 export default Dashboard;
