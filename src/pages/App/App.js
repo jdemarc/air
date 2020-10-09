@@ -5,6 +5,7 @@ import LoginPage from '../LoginPage';
 import SignupPage from '../SignupPage';
 import Dashboard from '../Dashboard';
 import userService from '../../utils/userService';
+import AuthPage from '../AuthPage';
 
 class App extends Component {
 
@@ -25,8 +26,18 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path='/' render={() =>
+          {/* <Route exact path='/' render={() =>
             <Dashboard 
+              user={this.state.user}
+              handleLogout={this.handleLogout}
+            />
+          }/> */}
+          <Route exact path='/' render={() =>
+            <AuthPage />
+          }/>
+
+          <Route exact path='/dashboard' render={() =>
+            <Dashboard
               user={this.state.user}
               handleLogout={this.handleLogout}
             />

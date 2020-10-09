@@ -26,7 +26,7 @@ class SignupForm extends Component {
       await userService.signup(this.state);
       this.props.handleSignupOrLogin();
 
-      this.props.history.push('/');
+      this.props.history.push('/dashboard');
     } catch (error) {
       this.props.updateMessage(error.message);
     }

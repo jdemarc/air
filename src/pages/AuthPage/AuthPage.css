@@ -1,0 +1,14 @@
+.landing {
+  display: flex;
+  height: 100%;
+  padding: 40px;
+  margin: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-flex {
+  display: flex;
+  justify-content: space-evenly;
+}
