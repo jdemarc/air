@@ -1,10 +1,8 @@
-import React from 'react';
-import { Component } from 'react';
 import React, { Component } from 'react';
 import SignupForm from '../../components/SignupForm'
 
 class SignupPage extends Component {
-  
+
     state = {
       message: ''
     }
