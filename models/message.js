@@ -1,11 +1,17 @@
 const mongoose = require('mongoose');
 
-// TO IMPLEMENT
-const userSchema = new mongoose.Schema({
+const messageSchema = new mongoose.Schema({
   content: String,
-
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  channel: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Channel'
+  }
 }, {
   timestamps: true
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Message', messageSchema);

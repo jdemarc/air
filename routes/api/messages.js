@@ -7,7 +7,7 @@ const messagesCtrl = require('../../controllers/messages');
 router.use(require('../../config/auth'));
 router.post('/', checkAuth, messagesCtrl.create);
 
-/*----- Helper Functions -----*/
+// Helper func.
 function checkAuth(req, res, next) {
   if (req.user) return next();
   return res.status(401).json({msg: 'Not Authorized'});
