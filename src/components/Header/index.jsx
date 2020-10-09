@@ -23,7 +23,7 @@ const Header = (props) => {
     </ul>;
 
   return (
-    <nav className="navbar navbar-default navbar-expand bg-light">
+    <nav className="navbar navbar-default navbar-expand text-light bg-dark">
       <div className="container">
         <div className="navbar-header">
           <span class="navbar-brand">AIR</span>
