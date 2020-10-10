@@ -3,6 +3,8 @@ import Header from '../../components/Header';
 import UserPanel from '../../components/UserPanel';
 import Input from '../../components/Input';
 import ChannelPanel from '../../components/ChannelPanel';
+import Messages from '../../components/Messages';
+
 import './Dashboard.css';
 
 const Dashboard = (props) => {
@@ -22,7 +24,9 @@ const Dashboard = (props) => {
               <ChannelPanel />
             </div>
             <div className="col-8 bg-warning">
-              <p> General or about </p>
+              <Messages
+                messages={props.messages}
+              />
               <Input
                 user={props.user}
                 messages={props.messages}

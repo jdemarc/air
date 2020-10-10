@@ -8,10 +8,12 @@ const Input = (props) => {
     
     const newMessage = {
       message,
+      username: props.user.name,
       user: props.user._id
     }
-    
+
     props.handleAddMessage(newMessage);
+    setMessage('');
   }
 
   return (

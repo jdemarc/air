@@ -37,8 +37,9 @@ class App extends Component {
   async componentDidMount() {
     const users = await userService.index();
     const messages = await messageService.index();
+    const reversedMessages = messages.reverse();
 
-    this.setState({ users, messages })
+    this.setState({ users, messages: reversedMessages })
   }
   
   render() {

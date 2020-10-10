@@ -12,6 +12,9 @@ async function create(req, res) {
 }
 
 async function index(req, res) {
-  const messages = await Message.find({}).limit(10);
+  const messages = await Message.find({})
+  .sort({createdAt: -1})
+  .limit(10);
+
   res.status(200).json(messages);
 }
