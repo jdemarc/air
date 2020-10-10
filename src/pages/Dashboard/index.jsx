@@ -4,7 +4,6 @@ import UserPanel from '../../components/UserPanel';
 import Input from '../../components/Input';
 import ChannelPanel from '../../components/ChannelPanel';
 import Messages from '../../components/Messages';
-
 import './Dashboard.css';
 
 const Dashboard = (props) => {

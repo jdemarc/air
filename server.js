@@ -3,12 +3,31 @@ const app = express();
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const cors = require('cors');
+const http = require('http');
+const socketio = require('socket.io')
+
+const port = process.env.PORT || 3001;
+
+const server = http.Server(app)
+
+//Initialize server
+const io = socketio(server);
+
+io.on('connection', socket => {
+  console.log(socket.handshake.query);
+
+  console.log('User is connected', socket.id);
+
+  
+})
 
 require('dotenv').config();
 
 // Connect to database.
 require('./config/database');
 
+app.use(cors());
 app.use(logger('dev'));
 
 // Middleware that creates req.body
@@ -16,7 +35,6 @@ app.use(express.json());
 
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
-
 
 // Routes
 app.use('/api/users', require('./routes/api/users'));
@@ -31,8 +49,6 @@ app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-const port = process.env.PORT || 3001;
-
-app.listen(port, function() {
-  console.log(`Express app running on port ${port}`)
+server.listen(port, function() {
+  console.log(`Listening on port ${port}`)
 });

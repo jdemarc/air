@@ -6,8 +6,8 @@ import SignupPage from '../SignupPage';
 import Dashboard from '../Dashboard';
 import userService from '../../utils/userService';
 import AuthPage from '../AuthPage';
-import io from 'socket.io-client';
 import messageService from '../../utils/messageService';
+import io from 'socket.io-client';
 
 class App extends Component {
 
@@ -35,11 +35,15 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    const socket = io('http://localhost:3000/'); 
+ 
+    socket.on('join', response => console.log(response))
+
     const users = await userService.index();
     const messages = await messageService.index();
     const reversedMessages = messages.reverse();
 
-    this.setState({ users, messages: reversedMessages })
+    // this.setState({ users, messages: reversedMessages })
   }
   
   render() {
