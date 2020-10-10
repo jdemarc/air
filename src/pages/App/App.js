@@ -10,7 +10,8 @@ import AuthPage from '../AuthPage';
 class App extends Component {
 
   state = {
-    user: userService.getUser()
+    user: userService.getUser(),
+    users: [],
   }
 
   handleSignupOrLogin = () => {
@@ -22,6 +23,11 @@ class App extends Component {
     this.setState({ user: null});
   }
 
+  async componentDidMount() {
+    const users = await userService.index();
+    this.setState({ users })
+  }
+  
   render() {
     return (
       <div>
@@ -34,6 +40,7 @@ class App extends Component {
             userService.getUser() ? 
               <Dashboard
                 user={this.state.user}
+                users={this.state.users}
                 handleLogout={this.handleLogout}
               />
               :

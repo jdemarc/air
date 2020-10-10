@@ -26,7 +26,7 @@ const Header = (props) => {
     <nav className="navbar navbar-default navbar-expand text-light bg-dark">
       <div className="container">
         <div className="navbar-header">
-          <span class="navbar-brand">AIR</span>
+          <span className="navbar-brand">AIR</span>
         </div>
           {nav}
       </div>

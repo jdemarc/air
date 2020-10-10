@@ -8,7 +8,6 @@ const app = express();
 require('dotenv').config();
 require('./config/database');
 
-
 app.use(logger('dev'));
 
 // Middleware that creates req.body

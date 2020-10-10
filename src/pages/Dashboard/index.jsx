@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../components/Header';
 import ChannelPanel from '../../components/ChannelPanel'
+import UserPanel from '../../components/UserPanel';
 import './Dashboard.css';
 
 const Dashboard = (props) => {
@@ -23,7 +24,9 @@ const Dashboard = (props) => {
               <p> General or about </p>
             </div>
             <div className="col bg-secondary">
-              <p> AU Panel </p>
+              <UserPanel
+                users={props.users}
+              />
 
             </div>
           </div>

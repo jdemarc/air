@@ -4,10 +4,16 @@ export default {
   signup,
   getUser,
   logout,
-  login
+  login,
+  index
 };
 
 const BASE_URL = '/api/users/';
+
+function index() {
+  return fetch(BASE_URL)
+  .then(res=>res.json());
+}
 
 // user from form -- the state.
 function signup(user) {
