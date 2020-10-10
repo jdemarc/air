@@ -1,7 +1,6 @@
 import React from 'react';
 
 const UserPanel = (props) => {
-  console.log(props)
   return (
     <div>
       <ul>

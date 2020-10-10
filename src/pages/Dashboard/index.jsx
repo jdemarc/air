@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from '../../components/Header';
-import ChannelPanel from '../../components/ChannelPanel'
 import UserPanel from '../../components/UserPanel';
+import Input from '../../components/Input';
+import ChannelPanel from '../../components/ChannelPanel';
 import './Dashboard.css';
 
 const Dashboard = (props) => {
@@ -22,12 +23,16 @@ const Dashboard = (props) => {
             </div>
             <div className="col-8 bg-warning">
               <p> General or about </p>
+              <Input
+                messages={props.messages}
+                handleMessageSubmit={props.handleMessageSubmit}
+                handleChange={props.handleChange}
+              />
             </div>
             <div className="col bg-secondary">
               <UserPanel
                 users={props.users}
               />
-
             </div>
           </div>
         </div>

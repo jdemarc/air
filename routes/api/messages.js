@@ -5,9 +5,10 @@ const messagesCtrl = require('../../controllers/messages');
 /*---------- Protected Routes ----------*/
 // Process the token for only the routes below
 router.use(require('../../config/auth'));
+router.get('/', messagesCtrl.index);
 router.post('/', checkAuth, messagesCtrl.create);
 
-// Helper func.
+//Helper func.
 function checkAuth(req, res, next) {
   if (req.user) return next();
   return res.status(401).json({msg: 'Not Authorized'});

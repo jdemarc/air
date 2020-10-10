@@ -1,11 +1,12 @@
 const express = require('express');
+const app = express();
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 
-const app = express();
-
 require('dotenv').config();
+
+// Connect to database.
 require('./config/database');
 
 app.use(logger('dev'));
@@ -23,7 +24,6 @@ app.use('/api/users', require('./routes/api/users'));
 // Mount auth middleware to process JWTs.
 app.use(require('./config/auth'));
 app.use('/api/messages', require('./routes/api/messages.js'));
-app.use('/api/channels', require('./routes/api/channels.js'));
 
 
 // Allow for proper client-side routing.

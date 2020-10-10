@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = (props) => {
-  console.log(props)
+  
   let nav = props.user ?
-
     <div>
       <Link to=''
         onClick={props.handleLogout}>

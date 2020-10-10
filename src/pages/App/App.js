@@ -6,12 +6,32 @@ import SignupPage from '../SignupPage';
 import Dashboard from '../Dashboard';
 import userService from '../../utils/userService';
 import AuthPage from '../AuthPage';
+import io from 'socket.io-client';
+import messageService from '../../utils/messageService';
 
 class App extends Component {
 
   state = {
     user: userService.getUser(),
     users: [],
+    messages: [],
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleMessageSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(e);
+    const newMessage = await messageService.create(e);
+  
+    this.setState({
+      messages: [...this.messages, newMessage]
+    })
   }
 
   handleSignupOrLogin = () => {
@@ -25,7 +45,9 @@ class App extends Component {
 
   async componentDidMount() {
     const users = await userService.index();
-    this.setState({ users })
+    const messages = await messageService.index();
+
+    this.setState({ users, messages })
   }
   
   render() {
@@ -41,7 +63,10 @@ class App extends Component {
               <Dashboard
                 user={this.state.user}
                 users={this.state.users}
+                messages={this.state.messages}
                 handleLogout={this.handleLogout}
+                handleChange={this.handleChange}
+                handleMessageSubmit={this.handleMessageSubmit}
               />
               :
               <Redirect to='/' />

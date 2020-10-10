@@ -1,6 +1,4 @@
-import tokenService from './tokenService'
-
-const BASE_URL = '/api/nessages/';
+const BASE_URL = '/api/messages/';
 
 export default {
   index,
@@ -8,23 +6,14 @@ export default {
 };
 
 function index() {
-  const options = {
-    method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + tokenService.getToken()
-    }
-  };
-  return fetch(BASE_URL, options).then(res => res.json());
+  return fetch(BASE_URL)
+  .then(res=>res.json());
 }
 
-function create(message) {
-  const options = {
+function create(msg) {
+  return fetch(BASE_URL, {
     method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-      'Authorization': 'Bearer ' + tokenService.getToken()
-    },
-    body: JSON.stringify(message)
-  };
-  return fetch(BASE_URL, options).then(res => res.json());
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify(msg)
+  }).then(res => res.json());
 }

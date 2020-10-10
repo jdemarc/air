@@ -2,15 +2,20 @@ const Message = require('../models/message');
 
 module.exports = {
   create,
+  index
 };
 
 async function create(req, res) {
-  console.log('user: ', req.user)
+  req.body.user = req.body.id;
+  
   try {
     await Message.create(req.body);
-    // Use the highScores action to return the list
-    // highScores(req, res);
   } catch (err) {
     res.json({err});
   }
+}
+
+async function index(req, res) {
+  const messages = await Message.find({}).limit(10);
+  res.status(200).json(messages);
 }
