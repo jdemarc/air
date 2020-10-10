@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Input = (props) => {
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    const newMessage = {
+      message,
+      user: props.user._id
+    }
+    
+    props.handleAddMessage(newMessage);
+  }
+
   return (
     <div>
-      <form onSubmit={props.handleMessageSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="blah blah blah"
-          value={props.messages}
-          name="messages"
-          onChange={props.handleChange}
+          placeholder="Type your message"
+          value={message}
+          name="message"
+          onChange={(e) => setMessage(e.target.value)}
         />
       <button>Enter</button>
       </form>

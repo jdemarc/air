@@ -1,4 +1,5 @@
 const Message = require('../models/message');
+const User = require('../models/user');
 
 module.exports = {
   create,
@@ -6,13 +7,8 @@ module.exports = {
 };
 
 async function create(req, res) {
-  req.body.user = req.body.id;
-  
-  try {
-    await Message.create(req.body);
-  } catch (err) {
-    res.json({err});
-  }
+  const newMessage = await Message.create(req.body)
+  res.status(200).json(newMessage);
 }
 
 async function index(req, res) {

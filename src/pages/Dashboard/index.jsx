@@ -24,9 +24,9 @@ const Dashboard = (props) => {
             <div className="col-8 bg-warning">
               <p> General or about </p>
               <Input
+                user={props.user}
                 messages={props.messages}
-                handleMessageSubmit={props.handleMessageSubmit}
-                handleChange={props.handleChange}
+                handleAddMessage={props.handleAddMessage}
               />
             </div>
             <div className="col bg-secondary">

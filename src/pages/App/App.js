@@ -17,20 +17,11 @@ class App extends Component {
     messages: [],
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleMessageSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log(e);
-    const newMessage = await messageService.create(e);
+  handleAddMessage = async (newMsg) => {
+    const newMessage = await messageService.create(newMsg);
   
     this.setState({
-      messages: [...this.messages, newMessage]
+      messages: [...this.state.messages, newMessage]
     })
   }
 
@@ -65,8 +56,7 @@ class App extends Component {
                 users={this.state.users}
                 messages={this.state.messages}
                 handleLogout={this.handleLogout}
-                handleChange={this.handleChange}
-                handleMessageSubmit={this.handleMessageSubmit}
+                handleAddMessage={this.handleAddMessage}
               />
               :
               <Redirect to='/' />
