@@ -23,7 +23,9 @@ app.use('/api/users', require('./routes/api/users'));
 
 // Mount auth middleware to process JWTs.
 app.use(require('./config/auth'));
-app.use('/api/messages', require('./routes/api/messages.js'))
+app.use('/api/messages', require('./routes/api/messages.js'));
+app.use('/api/channels', require('./routes/api/channels.js'));
+
 
 // Allow for proper client-side routing.
 app.get('/*', function(req, res) {
