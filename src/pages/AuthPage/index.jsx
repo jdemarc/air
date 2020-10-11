@@ -5,7 +5,7 @@ import './AuthPage.css'
 const AuthPage = () => {
   return (
     <div className="landing">
-        <h1 className="display-4"> AIR </h1>
+        <h1 className="display-4"> PARLEY </h1>
 
         <div className="custom-flex">
           <div className="card">

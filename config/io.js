@@ -10,9 +10,6 @@ io.on('connection', socket => {
     })
     
   socket.on('send-message', (msg) => {
-    console.log(msg);
-    console.log('HITTING NEW MESSAGE');
-    
     socket.broadcast.emit('push', msg);
   });
 });
