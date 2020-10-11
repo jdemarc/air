@@ -18,13 +18,6 @@ const ChatWindow = ( props ) => {
     setMessage('');
   }
 
-  // const sendMessage = () => {
-  //   if (socket) {
-  //     socket.emit("new-message", {
-
-  //     })
-  // };
-
   return (
     <div className="d-flex flex-column bg-light mt-3">
         {props.messages.map((message, idx) =>

@@ -15,6 +15,7 @@ class App extends Component {
     user: userService.getUser(),
     users: [],
     messages: [],
+    socket: ''
   }
 
 
@@ -37,10 +38,10 @@ class App extends Component {
 
   async componentDidMount() {
     const users = await userService.index();
-    this.socket = io('http://localhost:3000/')
+    this.state.socket = io('http://localhost:3000/')
     //const messages = await messageService.index();
 
-    this.socket.on('init', (msgs) => {
+    this.state.socket.on('init', (msgs) => {
       let msgsReversed = msgs.reverse();
 
       this.setState({
@@ -50,11 +51,11 @@ class App extends Component {
       console.log(this.state.messages)
     })
 
-    // this.socket.on('push', (messages) => {
-    //   this.setState((state) => ({
-    //     messages: [...state.messages, ...messages]
-    //   }))
-    // })
+    this.state.socket.on('push', (newMessage) => {
+      this.setState({
+        messages: [...this.state.messages, newMessage]
+      })
+    })
 
     this.setState({
       users

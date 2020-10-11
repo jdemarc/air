@@ -14,8 +14,7 @@ io.on('connection', socket => {
     console.log('HITTING NEW MESSAGE');
     
     socket.broadcast.emit('push', msg);
-  })
-
+  });
 });
 
 module.exports = io;
