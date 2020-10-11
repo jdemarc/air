@@ -1,9 +1,8 @@
 import React from 'react';
 import Header from '../../components/Header';
 import UserPanel from '../../components/UserPanel';
-import Input from '../../components/Input';
 import ChannelPanel from '../../components/ChannelPanel';
-import Messages from '../../components/Messages';
+import ChatWindow from '../../components/ChatWindow';
 import './Dashboard.css';
 
 const Dashboard = (props) => {
@@ -23,10 +22,8 @@ const Dashboard = (props) => {
               <ChannelPanel />
             </div>
             <div className="col-8 bg-warning">
-              <Messages
-                messages={props.messages}
-              />
-              <Input
+              <ChatWindow
+                socket={props.socket}
                 user={props.user}
                 messages={props.messages}
                 handleAddMessage={props.handleAddMessage}

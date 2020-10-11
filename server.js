@@ -5,22 +5,13 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cors = require('cors');
 const http = require('http');
-const socketio = require('socket.io')
 
 const port = process.env.PORT || 3001;
 
+const io = require('./config/io');
 const server = http.Server(app)
+io.attach(server);
 
-//Initialize server
-const io = socketio(server);
-
-io.on('connection', socket => {
-  console.log(socket.handshake.query);
-
-  console.log('User is connected', socket.id);
-
-  
-})
 
 require('dotenv').config();
 
