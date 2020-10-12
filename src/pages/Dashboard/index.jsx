@@ -6,6 +6,7 @@ import ChatWindow from '../../components/ChatWindow';
 import './Dashboard.css';
 import io from 'socket.io-client'
 import messageService from '../../utils/messageService';
+import Input from '../../components/Input';
 
 let socket;
 const ENDPOINT = 'http://localhost:3000/'
@@ -14,12 +15,12 @@ const Dashboard = (props) => {
   const [message, setMessage] = useState(''); // TO DO
   const [messages, setMessages] = useState([]);
 
+  // Set up socket
   useEffect(() => {
     socket = io(ENDPOINT);
-
-
   }, [ENDPOINT])
 
+  // Get initial messages. Reverse them, and scroll to the bottom of the box.
   useEffect(() => {
     socket.on('init', pastMessages => {
       let reversedPastMessages = pastMessages.reverse();
@@ -41,6 +42,21 @@ const Dashboard = (props) => {
     })
   }, [])
 
+  
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    const newMessage = {
+      message,
+      username: props.user.name,
+      user: props.user._id
+    }
+    
+    handleAddMessage(newMessage);
+    setMessage('');
+  }
+  
   const handleAddMessage = async (newMsg) => {
     const newMessage = await messageService.create(newMsg);
 
@@ -74,9 +90,13 @@ const Dashboard = (props) => {
             </div>
             <div className="col-8 bg-warning">
               <ChatWindow
-                user={props.user}
+                // user={props.user}
                 messages={messages}
-                handleAddMessage={handleAddMessage}
+              />
+              <Input
+                message={message}
+                handleSubmit={handleSubmit}
+                setMessage={setMessage}
               />
             </div>
             <div className="col bg-secondary">
