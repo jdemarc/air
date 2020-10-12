@@ -14,19 +14,6 @@ class App extends Component {
   state = {
     user: userService.getUser(),
     users: [],
-    messages: [],
-    socket: ''
-  }
-
-
-  handleAddMessage = async (newMsg) => {
-    const newMessage = await messageService.create(newMsg);
-    
-    this.state.socket.emit("send-message", newMessage);
-
-    this.setState({
-      messages: [...this.state.messages, newMessage]
-    }, this.scrollToBottom);
   }
 
   handleSignupOrLogin = () => {
@@ -38,34 +25,27 @@ class App extends Component {
     this.setState({ user: null});
   }
 
-  scrollToBottom = () => {
-    const chat = document.getElementById('chatbox');
-    chat.scrollTop = chat.scrollHeight;
-  }
-
   async componentDidMount() {
     const users = await userService.index();
-    this.state.socket = io('http://localhost:3000/')
-    //const messages = await messageService.index();
 
     this.setState({
-      users
+      users,
     })
 
-    this.state.socket.on('init', (msgs) => {
-      let msgsReversed = msgs.reverse();
+    // this.state.socket.on('init', (msgs) => {
+    //   let msgsReversed = msgs.reverse();
 
-      this.setState((state) => ({
-        messages: [...state.messages, ...msgsReversed]
-      }));
+    //   this.setState((state) => ({
+    //     messages: [...state.messages, ...msgsReversed]
+    //   }));
 
-    })
+    // })
 
-    this.state.socket.on('push', (newMessage) => {
-      this.setState((state) => ({
-        messages: [...state.messages, newMessage]
-      }), this.scrollToBottom);
-    })
+    // this.state.socket.on('push', (newMessage) => {
+    //   this.setState((state) => ({
+    //     messages: [...state.messages, newMessage]
+    //   }), this.scrollToBottom);
+    // })
   }
   
   render() {
@@ -81,8 +61,8 @@ class App extends Component {
               <Dashboard
                 user={this.state.user}
                 users={this.state.users}
-                messages={this.state.messages}
-                socket={this.state.socket}
+                //messages={this.state.messages}
+                // socket={this.state.socket}
                 handleLogout={this.handleLogout}
                 handleAddMessage={this.handleAddMessage}
               />

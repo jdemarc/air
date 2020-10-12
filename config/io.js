@@ -9,7 +9,7 @@ io.on('connection', socket => {
       socket.emit('init', messages);
     })
     
-  socket.on('send-message', (msg) => {
+  socket.on('message', (msg) => {
     socket.broadcast.emit('push', msg);
   });
 });
