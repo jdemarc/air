@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Header.css'
 
 const Header = (props) => {
   
   let nav = props.user ?
-    <div>
-      <Link to=''
-        onClick={props.handleLogout}>
+    <div className="rhs-container">
+        <span>Signed in as {props.user.name} </span>
+        <Link to=''
+          onClick={props.handleLogout}>
           Log out
-      </Link>
-      <span>Signed in as {props.user.name} </span>
+        </Link>
     </div>
     :
     <ul className="navbar-nav">
