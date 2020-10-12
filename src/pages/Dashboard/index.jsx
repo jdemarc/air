@@ -33,22 +33,23 @@ const Dashboard = (props) => {
       setMessages(messages => [...messages, newMessage]);
     });
 
+
   }, [])
 
-  // useEffect(() => {
-  //   socket.on('push', msg => {
-  //     setMessages(messages => [...messages, msg])
-  //   })
-  // })
+  useEffect(() => {
+    socket.on('push', msg => {
+      setMessages(messages => [...messages, msg])
+      scrollToBottom();
+    })
+  }, [])
 
   const handleAddMessage = async (newMsg) => {
     const newMessage = await messageService.create(newMsg);
 
-    socket.on('push', newMessage => {
-      setMessages(messages => [...messages, newMessage]);
-    })
-
-    // socket.emit("message", newMessage);
+    // Emit new message to all users.
+    socket.emit("message", newMessage);
+    setMessages(messages => [...messages, newMessage])
+    scrollToBottom();
   }
 
   // Ensure chat is loaded at the bottom.
