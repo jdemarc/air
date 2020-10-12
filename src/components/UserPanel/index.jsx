@@ -5,7 +5,7 @@ const UserPanel = (props) => {
     <div>
       <ul>
         {props.users.map(user =>
-        <div key={user.email}>
+        <div className="row" key={user.id}>
           {user.name}
         </div>
         )}

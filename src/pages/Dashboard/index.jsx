@@ -11,14 +11,41 @@ import Input from '../../components/Input';
 let socket;
 const ENDPOINT = 'http://localhost:3000/'
 
-const Dashboard = (props) => {
-  const [message, setMessage] = useState(''); // TO DO
+const Dashboard = ( props ) => {
+  const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState([]);
+  // const [user, setUser] = useState('');
 
   // Set up socket
   useEffect(() => {
     socket = io(ENDPOINT);
-  }, [ENDPOINT])
+  }, [])
+
+  useEffect(() => {
+    // When connecting, assign username and socket id to active user.
+    socket.on('connect', () => {
+      socket.emit('signon', props.user.name);
+    });
+
+    // Update active users list.
+    socket.on("users", users => {
+      setUsers(users);
+    })
+
+    // If another user connects, update the users array.
+    socket.on("connected", user => {
+      setUsers(users => [...users, user]);
+    });
+
+    // Remove user from list upon disconnect.
+    socket.on('disconnected', id => {
+      setUsers(users => {
+        return users.filter(user => user.id !== id);
+      });
+    })
+
+  }, [users])
 
   // Get initial messages. Reverse them, and scroll to the bottom of the box.
   useEffect(() => {
@@ -27,22 +54,17 @@ const Dashboard = (props) => {
       setMessages(messages => [...messages, ...reversedPastMessages])
       scrollToBottom();
     })
-  }, [])
 
-  useEffect(() => {
-    socket.on('message', newMessage => {
-      setMessages(messages => [...messages, newMessage]);
-    });
-  }, [])
-
-  useEffect(() => {
     socket.on('push', msg => {
       setMessages(messages => [...messages, msg])
       scrollToBottom();
     })
-  }, [])
 
-  
+    socket.on('message', newMessage => {
+      setMessages(messages => [...messages, newMessage]);
+    });
+
+  }, [])
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -90,7 +112,6 @@ const Dashboard = (props) => {
             </div>
             <div className="col-8 bg-warning">
               <ChatWindow
-                // user={props.user}
                 messages={messages}
               />
               <Input
@@ -101,7 +122,7 @@ const Dashboard = (props) => {
             </div>
             <div className="col bg-secondary">
               <UserPanel
-                users={props.users}
+                users={users}
               />
             </div>
           </div>

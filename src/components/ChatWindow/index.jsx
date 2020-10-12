@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ChatWindow.css';
 
 const ChatWindow = ({ messages } ) => {
 
   return (
-    <div className="d-flex flex-column bg-light mt-3 p-2" id="chatbox"
-      style={{overflowY: 'auto', height: 400}}
+    <div className="wrapper">
+    <div className="d-flex flex-column bg-light mt-3" id="chatbox"
+      style={{overflowY: 'auto'}}
     >
         {messages.map((message, idx) =>
         <div className="message-row" key={message.user+idx}>
-          {message.username}: {message.message}
+          <div className="font-weight-bold"> {message.username} </div> {message.message}
         </div>
         )}
+    </div>
     </div>
   )
 }

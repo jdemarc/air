@@ -4,7 +4,7 @@ const Input = ({message, setMessage, handleSubmit}) => {
 
   return (
     <div>
-      <form className="text-center d-flex mt-2"
+      <form className="text-center d-flex mt-2 mb-2"
       onSubmit={handleSubmit}>
         <input className="form-control"
           type="text"
