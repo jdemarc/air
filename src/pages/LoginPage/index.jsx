@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
+import './LoginPage.css';
 
 class LoginPage extends Component {
   state = {
@@ -32,10 +33,12 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
-        <div>Log In</div>
-        <form onSubmit={this.handleSubmit}>
-          <input
+      <div className="wrapper">
+        <form className="text-center border border-light p-5"
+        onSubmit={this.handleSubmit}>
+
+          <p className="h4 mb-4">Login</p>
+          <input className="form-control mb-4"
             type="email"
             placeholder="E-mail"
             value={this.state.email}
@@ -43,9 +46,7 @@ class LoginPage extends Component {
             onChange={this.handleChange}
           />
 
-          <hr />
-
-          <input
+          <input className="form-control mb-4"
             type="password"
             placeholder="Password"
             value={this.state.password}
@@ -53,7 +54,7 @@ class LoginPage extends Component {
             onChange={this.handleChange}
           />
 
-          <button>Log In</button>
+          <button className="btn btn-info btn-block mb-4">Log In</button>
           <Link to='/'>Cancel</Link>
         </form>
       </div>

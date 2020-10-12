@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
-
+import './SignupForm.css'
 class SignupForm extends Component {
   state = {
     name: '',
@@ -41,9 +41,11 @@ class SignupForm extends Component {
 
   render() {
     return (
-      <div> Sign up
-        <form onSubmit={this.handleSubmit}>
-          <input
+      <div className="wrapper">
+        <form className="text-center border border-light p-5"
+        onSubmit={this.handleSubmit}>
+          <p className="h4 mb-4"> Sign up</p>
+          <input className="form-control mb-4"
             type="text"
             placeholder="Name"
             value={this.state.name}
@@ -51,7 +53,7 @@ class SignupForm extends Component {
             onChange={this.handleChange}
           />
 
-          <input
+          <input className="form-control mb-4"
             type="email"
             placeholder="E-mail"
             value={this.state.email}
@@ -59,7 +61,7 @@ class SignupForm extends Component {
             onChange={this.handleChange}
           />
 
-          <input
+          <input className="form-control mb-4"
             type="password"
             placeholder="Password"
             value={this.state.password}
@@ -67,7 +69,7 @@ class SignupForm extends Component {
             onChange={this.handleChange}
           />
 
-          <input
+          <input className="form-control mb-4"
             type="password"
             placeholder="Confirm Password"
             value={this.state.passwordConfirm}
@@ -75,7 +77,7 @@ class SignupForm extends Component {
             onChange={this.handleChange}
           />
 
-          <button disabled={this.isFormInvalid()}>Sign Up</button>
+          <button className="btn btn-info btn-block mb-4" disabled={this.isFormInvalid()}>Sign Up</button>
           <Link to='/'>Cancel</Link>
         </form>
       </div>
