@@ -31,15 +31,17 @@ const ChatWindow = ( props ) => {
     </div>
 
       <div>
-        <form onSubmit={handleSubmit}>
-          <input
+        <form className="text-center d-flex mt-2"
+        onSubmit={handleSubmit}>
+          <input className="form-control"
             type="text"
             placeholder="Type your message"
             value={message}
             name="message"
             onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' ? handleSubmit(e) : null}
           />
-          <button>Enter</button>
+          <button className="btn btn-info"> Send </button>
         </form>
       </div>
 

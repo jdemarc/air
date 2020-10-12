@@ -32,8 +32,6 @@ const Dashboard = (props) => {
     socket.on('message', newMessage => {
       setMessages(messages => [...messages, newMessage]);
     });
-
-
   }, [])
 
   useEffect(() => {
