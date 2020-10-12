@@ -1,55 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from '../../components/Header';
 import UserPanel from '../../components/UserPanel';
 import ChannelPanel from '../../components/ChannelPanel';
 import ChatWindow from '../../components/ChatWindow';
-import messageService from '../../utils/messageService';
 import './Dashboard.css';
-import io from 'socket.io-client'
 
 const Dashboard = (props) => {
-  const socket = io('http://localhost:3000/')
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    socket.on('init', msgs => {
-      let msgsReversed = msgs.reverse();
-
-      setMessages([...messages, ...msgsReversed]);
-    })
-
-  }, [0])
-
-  useEffect(() => {
-    socket.on('push', newMsg => {
-      setMessages([...messages, newMsg])
-    })
-
-    scrollToBottom();
-  }, [])
-
-  const handleAddMessage = async (newMsg) => {
-    const newMessage = await messageService.create(newMsg);
-    
-    socket.emit("message", newMessage);
-  }
-
-  const scrollToBottom = () => {
-    const chat = document.getElementById('chatbox');
-    chat.scrollTop = chat.scrollHeight;
-  }
-
-//   useEffect(() => {
-
-//     props.socket.on('init', (msgs) => {
-//       let msgsReversed = msgs.reverse();
-
-//       this.setState((state) => ({
-//         messages: [...state.messages, ...msgsReversed]
-//       }));
-
-//     })
-//  }, [props.socket])
 
   return (
     <div>
@@ -69,8 +25,8 @@ const Dashboard = (props) => {
             <div className="col-8 bg-warning">
               <ChatWindow
                 user={props.user}
-                messages={messages}
-                handleAddMessage={handleAddMessage}
+                messages={props.messages}
+                handleAddMessage={props.handleAddMessage}
               />
             </div>
             <div className="col bg-secondary">
