@@ -11,11 +11,10 @@ import Input from '../../components/Input';
 let socket;
 const ENDPOINT = 'http://localhost:3000/'
 
-const Dashboard = ( props ) => {
+const Dashboard = ( {user, handleLogout} ) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-  // const [user, setUser] = useState('');
 
   // Set up socket
   useEffect(() => {
@@ -24,28 +23,25 @@ const Dashboard = ( props ) => {
 
   useEffect(() => {
     // When connecting, assign username and socket id to active user.
-    socket.on('connect', () => {
-      socket.emit('signon', props.user.name);
-    });
-
-    // Update active users list.
-    socket.on("users", users => {
-      setUsers(users);
-    })
-
-    // If another user connects, update the users array.
-    socket.on("connected", user => {
-      setUsers(users => [...users, user]);
-    });
-
-    // Remove user from list upon disconnect.
-    socket.on('disconnected', id => {
-      setUsers(users => {
-        return users.filter(user => user.id !== id);
+      socket.on("connect", () => {
+        socket.emit("sign-on", user.name);
       });
-    })
+  
+      socket.on("users", users => {
+        setUsers(users);
+      });
+  
+      socket.on("connected", user => {
+        setUsers(users => [...users, user]);
+      });
+  
+      socket.on("disconnected", id => {
+        setUsers(users => {
+          return users.filter(user => user.id !== id);
+        });
+      });
 
-  }, [users])
+  }, [])
 
   // Get initial messages. Reverse them, and scroll to the bottom of the box.
   useEffect(() => {
@@ -71,8 +67,8 @@ const Dashboard = ( props ) => {
     
     const newMessage = {
       message,
-      username: props.user.name,
-      user: props.user._id
+      username: user.name,
+      user: user._id
     }
     
     handleAddMessage(newMessage);
@@ -99,8 +95,8 @@ const Dashboard = ( props ) => {
     <div>
       <div>
         <Header
-          user={props.user}
-          handleLogout={props.handleLogout}
+          user={user}
+          handleLogout={handleLogout}
         />
       </div>
 
