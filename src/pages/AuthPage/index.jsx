@@ -6,7 +6,7 @@ const AuthPage = () => {
   return (
     <div className="primary-container">
       <div className="card" style={{width: '30rem'}}>
-        <h1 className="card-header text-center"> PARLEY </h1>
+        <h1 className="card-header text-center" id="title"> Parley </h1>
           <div className="row">
             <div className="col-6 text-center border-right p-3">
                 <h5 className="card-title">

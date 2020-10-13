@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
 import './SignupForm.css'
+
 class SignupForm extends Component {
   state = {
     name: '',
@@ -41,45 +42,49 @@ class SignupForm extends Component {
 
   render() {
     return (
-      <div className="su-wrapper">
-        <form className="text-center border border-light p-5 w-50"
-        onSubmit={this.handleSubmit}>
-          <h1>Sign up</h1>
-          <input className="form-control mb-4"
-            type="text"
-            placeholder="Name"
-            value={this.state.name}
-            name="name"
-            onChange={this.handleChange}
-          />
+      <div className="d-flex justify-content-center mt-5">
+        <div className="card" style={{width: '30rem'}}>
+          <h1 className="card-header text-center" id="title">Sign up</h1>
+        <div className="card-body">
+          <form className="text-center"
+          onSubmit={this.handleSubmit}>
+            <input className="form-control mb-4"
+              type="text"
+              placeholder="Name"
+              value={this.state.name}
+              name="name"
+              onChange={this.handleChange}
+            />
 
-          <input className="form-control mb-4"
-            type="email"
-            placeholder="E-mail"
-            value={this.state.email}
-            name="email"
-            onChange={this.handleChange}
-          />
+            <input className="form-control mb-4"
+              type="email"
+              placeholder="E-mail"
+              value={this.state.email}
+              name="email"
+              onChange={this.handleChange}
+            />
 
-          <input className="form-control mb-4"
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            name="password"
-            onChange={this.handleChange}
-          />
+            <input className="form-control mb-4"
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              name="password"
+              onChange={this.handleChange}
+            />
 
-          <input className="form-control mb-4"
-            type="password"
-            placeholder="Confirm Password"
-            value={this.state.passwordConfirm}
-            name="passwordConfirm"
-            onChange={this.handleChange}
-          />
+            <input className="form-control mb-4"
+              type="password"
+              placeholder="Confirm Password"
+              value={this.state.passwordConfirm}
+              name="passwordConfirm"
+              onChange={this.handleChange}
+            />
 
-          <button className="btn btn-info btn-block mb-4" disabled={this.isFormInvalid()}>Sign Up</button>
-          <Link to='/'>Cancel</Link>
-        </form>
+            <button className="btn btn-info btn-block mb-4" disabled={this.isFormInvalid()}>Sign Up</button>
+            <Link to='/'>Cancel</Link>
+          </form>
+        </div>
+        </div>
       </div>
     );
   }

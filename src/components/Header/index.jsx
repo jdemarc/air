@@ -33,7 +33,7 @@ const Header = (props) => {
 
   return (
       <div className="container rounded-top border border-secondary" id="header">
-        <h1 className="p-2"> PARLEY </h1>
+        <h1 className="p-2" id="title"> Parley </h1>
           {nav}
       </div>
   );
