@@ -4,11 +4,10 @@ import './Input.css';
 const Input = ({message, setMessage, handleSubmit}) => {
 
   return (
-    <div className="form-group">
-      <form className="form-inline text-center"
+    <div className="d-flex w-100">
+      <form className="d-flex w-100 mt-3"
       onSubmit={handleSubmit}>
-      <div className="form-group mt-2">
-        <input className="form-control"
+        <input className="d-flex w-100"
           type="text"
           placeholder="Type your message"
           value={message}
@@ -17,7 +16,6 @@ const Input = ({message, setMessage, handleSubmit}) => {
           onKeyPress={(e) => e.key === 'Enter' ? handleSubmit(e) : null}
           />
         <button className="btn btn-info"> Send </button>
-      </div>
       </form>
     </div>
   );

@@ -5,7 +5,7 @@ import moment from 'moment';
 const ChatWindow = ({ messages } ) => {
 
   return (
-    <div id="chatbox"
+    <div className="border-bottom border-left border-secondary" id="chatbox"
       style={{overflowY: 'auto'}}
     >
         {messages.map((message, idx) =>
@@ -19,7 +19,6 @@ const ChatWindow = ({ messages } ) => {
               {message.username} 
               {moment(message.createdAt).format('lll')}  
             {message.message}
-            <hr />
         </div>
         )}
     </div>

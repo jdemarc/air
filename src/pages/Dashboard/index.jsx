@@ -93,7 +93,7 @@ const Dashboard = ( {user, handleLogout} ) => {
 
   return (
     <div className="dashboard-container">
-      <div className="centering-container">
+      <div className="centering-container border border-secondary rounded p-3 ">
         <Header
           user={user}
           handleLogout={handleLogout}
@@ -106,10 +106,10 @@ const Dashboard = ( {user, handleLogout} ) => {
           handleSubmit={handleSubmit}
           setMessage={setMessage}
         />
+      </div>
         <UserPanel
           users={users}
         />
-      </div>
     </div>
   )
 };
