@@ -41,10 +41,10 @@ class SignupForm extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <form className="text-center border border-light p-5"
+      <div className="su-wrapper">
+        <form className="text-center border border-light p-5 w-50"
         onSubmit={this.handleSubmit}>
-          <p className="h4 mb-4"> Sign up</p>
+          <h1>Sign up</h1>
           <input className="form-control mb-4"
             type="text"
             placeholder="Name"

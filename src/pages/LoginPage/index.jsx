@@ -33,11 +33,10 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <form className="text-center border border-light p-5"
+      <div className="login-wrapper">
+        <form className="text-center border border-light p-5 w-50"
         onSubmit={this.handleSubmit}>
-
-          <p className="h4 mb-4">Login</p>
+          <h1>Login</h1>
           <input className="form-control mb-4"
             type="email"
             placeholder="E-mail"
