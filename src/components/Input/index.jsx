@@ -1,11 +1,13 @@
 import React from 'react';
+import './Input.css';
 
 const Input = ({message, setMessage, handleSubmit}) => {
 
   return (
-    <div>
-      <form className="text-center d-flex mt-2 mb-2"
+    <div className="form-group">
+      <form className="form-inline text-center"
       onSubmit={handleSubmit}>
+      <div className="form-group mt-2">
         <input className="form-control"
           type="text"
           placeholder="Type your message"
@@ -13,8 +15,9 @@ const Input = ({message, setMessage, handleSubmit}) => {
           name="message"
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' ? handleSubmit(e) : null}
-        />
+          />
         <button className="btn btn-info"> Send </button>
+      </div>
       </form>
     </div>
   );

@@ -92,39 +92,24 @@ const Dashboard = ( {user, handleLogout} ) => {
 
 
   return (
-    <div>
-      <div>
+    <div className="dashboard-container">
+      <div className="centering-container">
         <Header
           user={user}
           handleLogout={handleLogout}
         />
+        <ChatWindow
+          messages={messages}
+        />
+        <Input
+          message={message}
+          handleSubmit={handleSubmit}
+          setMessage={setMessage}
+        />
+        <UserPanel
+          users={users}
+        />
       </div>
-
-      <div className="dashboard">
-        <div className="container h-100">
-          <div className="row h-100">
-            {/* <div className="col bg-primary"> */}
-              {/* <ChannelPanel /> */}
-            {/* </div> */}
-            <div className="col-10 bg-warning">
-              <ChatWindow
-                messages={messages}
-              />
-              <Input
-                message={message}
-                handleSubmit={handleSubmit}
-                setMessage={setMessage}
-              />
-            </div>
-            <div className="col bg-secondary">
-              <UserPanel
-                users={users}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   )
 };

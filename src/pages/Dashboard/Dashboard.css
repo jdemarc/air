@@ -1,3 +1,18 @@
-.dashboard {
-  height: 90vh;
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+
+}
+
+.centering-container {
+  display: flex;
+  flex-direction:column;
+  width: 70vh;
+  height: 70vh;
+  align-items: center;
+  margin-top: 15vh;
 }
