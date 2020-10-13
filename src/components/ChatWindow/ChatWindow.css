@@ -9,3 +9,10 @@
 hr {
   margin-bottom: 2px;
 }
+
+.date-time {
+  color: lightgray;
+}
+/* #message-row:nth-child(2n){
+  background: lightgray
+} */

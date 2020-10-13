@@ -6,3 +6,7 @@
 .form-wrapper {
   width: auto;
 }
+
+button {
+  background: red;
+}
