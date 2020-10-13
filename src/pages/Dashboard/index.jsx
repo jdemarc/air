@@ -111,7 +111,6 @@ const Dashboard = ( {user, handleLogout} ) => {
           users={users}
         />
       </div>
-        
     </div>
   )
 };

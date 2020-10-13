@@ -6,7 +6,8 @@ import SignupPage from '../SignupPage';
 import Dashboard from '../Dashboard';
 import userService from '../../utils/userService';
 import AuthPage from '../AuthPage';
-import EditProfilePage from '../EditProfilePage';
+import ProfilePage from '../ProfilePage';
+import ProfileEditForm from '../../components/ProfileEditForm';
 
 class App extends Component {
 
@@ -55,8 +56,16 @@ class App extends Component {
             />
           }/>
 
-          <Route path="/profile/:id" render={({history}) =>
-            <EditProfilePage
+          <Route exact path="/profile" render={({history}) =>
+            <ProfilePage
+              user={this.state.user}
+              history={history}
+            />
+          }/>
+
+          <Route exact path="/edit-profile" render={({history}) =>
+            <ProfileEditForm
+              user={this.state.user}
               history={history}
             />
           }/>
