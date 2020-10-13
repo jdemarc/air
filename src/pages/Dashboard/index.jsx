@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import UserPanel from '../../components/UserPanel';
-import ChannelPanel from '../../components/ChannelPanel';
 import ChatWindow from '../../components/ChatWindow';
-import './Dashboard.css';
+import Input from '../../components/Input';
 import io from 'socket.io-client'
 import messageService from '../../utils/messageService';
-import Input from '../../components/Input';
+import './Dashboard.css';
 
 let socket;
 const ENDPOINT = 'http://localhost:3000/'
@@ -84,6 +83,7 @@ const Dashboard = ( {user, handleLogout} ) => {
     scrollToBottom();
   }
 
+  
   // Ensure chat is loaded at the bottom.
   const scrollToBottom = () => {
     const chat = document.getElementById('chatbox');

@@ -6,6 +6,7 @@ import SignupPage from '../SignupPage';
 import Dashboard from '../Dashboard';
 import userService from '../../utils/userService';
 import AuthPage from '../AuthPage';
+import EditProfilePage from '../EditProfilePage';
 
 class App extends Component {
 
@@ -53,6 +54,13 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           }/>
+
+          <Route path="/profile/:id" render={({history}) =>
+            <EditProfilePage
+              history={history}
+            />
+          }/>
+
         </Switch>
   
       </div>

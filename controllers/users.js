@@ -6,7 +6,9 @@ const SECRET = process.env.SECRET;
 module.exports = {
   signup,
   login,
-  index
+  index,
+  edit,
+  show
 };
 
 async function index(req, res) {
@@ -61,4 +63,14 @@ function createJWT(user) {
     { expiresIn: '24h' } // Unspecified... forever
     // Sliding expiration? Refresh token upon login.
   );
+}
+
+async function edit(req, res) {
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+  res.status(200).json(updatedPuppy);
+}
+
+async function show(req, res) {
+  const puppy = await Puppy.findById(req.params.id);
+  res.status(200).json(puppy);
 }

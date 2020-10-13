@@ -51,3 +51,11 @@ function login(credentials) {
   })
   .then(({ token }) => tokenService.setToken(token));
 }
+
+export function update(user) {
+  return fetch(`${BASE_URL}/${user._id}`, {
+    method: 'PUT',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify(user)
+  }).then(res => res.json());
+}
