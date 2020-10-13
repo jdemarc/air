@@ -106,10 +106,12 @@ const Dashboard = ( {user, handleLogout} ) => {
           handleSubmit={handleSubmit}
           setMessage={setMessage}
         />
-      </div>
+
         <UserPanel
           users={users}
         />
+      </div>
+        
     </div>
   )
 };

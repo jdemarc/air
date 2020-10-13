@@ -5,7 +5,7 @@ const Input = ({message, setMessage, handleSubmit}) => {
 
   return (
     <div className="d-flex w-100">
-      <form className="d-flex w-100 mt-3"
+      <form className="d-flex w-100 mt-3 mb-3"
       onSubmit={handleSubmit}>
         <input className="d-flex w-100"
           type="text"

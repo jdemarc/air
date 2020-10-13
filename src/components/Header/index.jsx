@@ -32,7 +32,7 @@ const Header = (props) => {
     </ul>;
 
   return (
-      <div className="container bg-light rounded-top border border-secondary">
+      <div className="container rounded-top border border-secondary" id="header">
         <h1 className="p-2"> PARLEY </h1>
           {nav}
       </div>

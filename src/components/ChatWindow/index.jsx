@@ -5,7 +5,7 @@ import moment from 'moment';
 const ChatWindow = ({ messages } ) => {
 
   return (
-    <div className="border-bottom border-left border-secondary" id="chatbox"
+    <div className="border-bottom border-left border-right border-secondary" id="chatbox"
       style={{overflowY: 'auto'}}
     >
         {messages.map((message, idx) =>
