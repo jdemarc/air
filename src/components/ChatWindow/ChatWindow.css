@@ -1,8 +1,11 @@
-.message-row {
-  padding: 5px;
-}
+
 
 .wrapper {
   display: flex;
+  flex-direction: column;
   height: 100vh;
+}
+
+hr {
+  margin-bottom: 2px;
 }

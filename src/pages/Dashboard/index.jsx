@@ -23,23 +23,23 @@ const Dashboard = ( {user, handleLogout} ) => {
 
   useEffect(() => {
     // When connecting, assign username and socket id to active user.
-      socket.on("connect", () => {
-        socket.emit("sign-on", user.name);
+    socket.on("connect", () => {
+      socket.emit("sign-on", user.name);
+    });
+
+    socket.on("users", users => {
+      setUsers(users);
+    });
+
+    socket.on("connected", user => {
+      setUsers(users => [...users, user]);
+    });
+
+    socket.on("disconnected", id => {
+      setUsers(users => {
+        return users.filter(user => user.id !== id);
       });
-  
-      socket.on("users", users => {
-        setUsers(users);
-      });
-  
-      socket.on("connected", user => {
-        setUsers(users => [...users, user]);
-      });
-  
-      socket.on("disconnected", id => {
-        setUsers(users => {
-          return users.filter(user => user.id !== id);
-        });
-      });
+    });
 
   }, [])
 
@@ -101,12 +101,12 @@ const Dashboard = ( {user, handleLogout} ) => {
       </div>
 
       <div className="dashboard">
-        <div className="container-fluid h-100">
+        <div className="container h-100">
           <div className="row h-100">
-            <div className="col bg-primary">
-              <ChannelPanel />
-            </div>
-            <div className="col-8 bg-warning">
+            {/* <div className="col bg-primary"> */}
+              {/* <ChannelPanel /> */}
+            {/* </div> */}
+            <div className="col-10 bg-warning">
               <ChatWindow
                 messages={messages}
               />

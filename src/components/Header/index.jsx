@@ -5,7 +5,7 @@ import './Header.css'
 const Header = (props) => {
   
   let nav = props.user ?
-    <div className="rhs-container">
+    <div className="navbar-nav flex-row">
         <span>Signed in as {props.user.name} </span>
         <Link to=''
           onClick={props.handleLogout}>
@@ -23,14 +23,10 @@ const Header = (props) => {
     </ul>;
 
   return (
-    <nav className="navbar navbar-default navbar-expand text-light bg-dark">
       <div className="container">
-        <div className="navbar-header">
-          <span className="navbar-brand">PARLEY</span>
-        </div>
+        <div className=""> PARLEY </div>
           {nav}
       </div>
-    </nav>
   );
 };
 

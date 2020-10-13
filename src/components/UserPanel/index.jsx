@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import userService from '../../utils/userService';
 
-const UserPanel = (props) => {
+const UserPanel = ( {users} ) => {
+  // const [allUsers, setAllUsers] = useState([]);
+
+  // useEffect(() => {
+
+  //   fetchUsers();
+
+  // }, []);
+
+  // const fetchUsers = async () => {
+  //   const registeredUsers = await userService.index();
+    
+  //   setAllUsers(allUsers => [...allUsers, ...registeredUsers]);
+  // }
+
   return (
     <div>
       <ul>
-        {props.users.map(user =>
-        <div className="row" key={user.id}>
+        {users.map(user =>
+        <div className="row" key={user._id}>
           {user.name}
         </div>
         )}
