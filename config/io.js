@@ -14,7 +14,6 @@ io.on('connection', socket => {
     users[socket.id] = user;
     io.emit("connected", user);
     io.emit("users", Object.values(users));
-    console.log(users);
   });
 
   ///

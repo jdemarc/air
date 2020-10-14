@@ -18,10 +18,6 @@ code {
     monospace;
 }
 
-html, body {
-  height: 100%;
-}
-
 #title {
   font-family: 'Kaushan Script', cursive;
 }

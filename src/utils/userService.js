@@ -5,7 +5,8 @@ export default {
   getUser,
   logout,
   login,
-  index
+  index,
+  update
 };
 
 const BASE_URL = '/api/users/';
@@ -40,6 +41,8 @@ function logout() {
 }
 
 function login(credentials) {
+  console.log('credentials in login', credentials)
+
   return fetch(BASE_URL + 'login', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
@@ -52,10 +55,14 @@ function login(credentials) {
   .then(({ token }) => tokenService.setToken(token));
 }
 
-export function update(user) {
+function update(user) {
   return fetch(`${BASE_URL}/${user._id}`, {
     method: 'PUT',
     headers: {'content-type': 'application/json'},
     body: JSON.stringify(user)
-  }).then(res => res.json());
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw new Error('Bad credentials');
+  })
 }

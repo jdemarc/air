@@ -27,12 +27,10 @@ const Dashboard = ( {user, handleLogout} ) => {
     });
   
     socket.on("connected", (user) => {
-      console.log('connected socket', user)
       setUsers(users => [...users, user]);
     });
   
     socket.on("users", users => {
-      console.log('users socket', users)
       setUsers(users);
     });
     

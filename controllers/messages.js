@@ -1,9 +1,9 @@
 const Message = require('../models/message');
-const User = require('../models/user');
+// const User = require('../models/user');
 
 module.exports = {
   create,
-  index
+  // index
 };
 
 async function create(req, res) {

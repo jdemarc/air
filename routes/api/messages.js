@@ -5,7 +5,7 @@ const messagesCtrl = require('../../controllers/messages');
 /*---------- Protected Routes ----------*/
 // Process the token for only the routes below
 // router.use(require('../../config/auth'));
-router.get('/', messagesCtrl.index);
+// router.get('/', messagesCtrl.index);
 router.post('/', messagesCtrl.create);
 
 //Helper func.

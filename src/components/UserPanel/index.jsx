@@ -13,7 +13,6 @@ const UserPanel = ( {users} ) => {
         Online
       </h5>
       <div className="d-flex">
-        {console.log('users in userpanel', users)}
         {users.map(user =>
         <div className="pl-2" key={user.id}>
           {user.name}
