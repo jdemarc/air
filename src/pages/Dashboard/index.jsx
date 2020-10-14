@@ -18,7 +18,6 @@ const Dashboard = ( {user, handleLogout} ) => {
   // Set up socket
   useEffect(() => {
     socket = io(ENDPOINT);
-    
   }, [])
   
   useEffect(() => {

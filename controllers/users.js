@@ -17,12 +17,16 @@ async function index(req, res) {
 }
 
 async function find(req, res) {
-  console.log(req.body);
+  // Find user by e-mail using req.body created in userService fetch
   const user = await User.findOne({email: req.body.email});
 
   try {
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
+        // res -- built into Express
+        // represents HTTP response
+        // .json lets you send back a json.
+        // Build your own json >>
         res.json({
           err: 'User found!',
           status: 200
@@ -85,26 +89,11 @@ async function login(req, res) {
 }
 
 async function update(req, res) {
-  try {
+  console.log(req.body);
+  
     const user = await User.findOne({email: req.body.email});
 
-    if (!user) return res.status(401).json({err: 'bad credentials'});
-    
-    user.comparePassword(req.body.password, (err, isMatch) => {
-      if (isMatch) {
 
-        //Update user here
-
-
-        const token = createJWT(user);
-        res.json({token});
-      } else {
-        return res.status(401).json({err: 'bad credentials'});
-      }
-    });
-  } catch (error) {
-    return res.status(400).json(error);
-  }
 }
 //------------------------------
 // Functions that do not get exported... helpers

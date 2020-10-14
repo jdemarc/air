@@ -39,8 +39,6 @@ const ProfilePage = ( { user, history } ) => {
       }
 
     }).then((result) => {
-
-      // setEmail(result.value.email);
       if (result.value) {
         setPassword(result.value.password);
 
@@ -67,7 +65,6 @@ const ProfilePage = ( { user, history } ) => {
             </svg>
 
             <div>{user.email}</div>
-            {console.log(password, status)}
 
             <div onClick={(e) => handleSwalClick(e)}>
                 <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-gear mt-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

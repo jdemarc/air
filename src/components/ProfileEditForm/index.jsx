@@ -7,8 +7,31 @@ const ProfileEditForm = ( {user} ) => {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
 
-  const handleUpdateProfile = () => {}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(e.target);
+
+    const updatedUser = {
+      name,
+      email,
+      password
+    }
+
+    handleUpdateUser(updatedUser);
+  };
+
+  //async await
+  const handleUpdateUser = (updatedUser) => {
+    console.log(updatedUser)
+    console.log('handleUser()')
+  }
   
+
+  const isFormInvalid = () => {
+    return (!password || !passwordConfirm) || 
+    (password !== passwordConfirm)
+  };
 
   return (
     <div className="d-flex justify-content-center mt-5">
@@ -68,7 +91,10 @@ const ProfileEditForm = ( {user} ) => {
 
             </div>
               <div className="d-flex justify-content-around align-items-center m-3">
-                <button className="btn btn-primary">Submit</button>
+                <button className="btn btn-primary"
+                  // disabled={isFormInvalid()}
+                  onClick={(e) => handleSubmit(e)}
+                >Submit</button>
                 
                 <Link to='/profile'>
                   <button className="btn btn-primary">Back</button>

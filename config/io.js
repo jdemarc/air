@@ -5,6 +5,7 @@ const Message = require('../models/message');
 const users = {};
 
 io.on('connection', socket => {
+  console.log('User has connected');
   socket.on("sign-on", username => {
     const user = {
       name: username,

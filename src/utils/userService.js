@@ -53,14 +53,33 @@ function login(credentials) {
   .then(({ token }) => tokenService.setToken(token));
 }
 
+// Verify password
 function verify(credentials) {
+  // 1st argument is route -- /api/users/find
+  // return to where verify is being called in front end
   return fetch(BASE_URL + 'find', {
     method: 'POST',
+    // Understand types of data being sent
     headers: {'content-type': 'application/json'},
+    // req.body
     body: JSON.stringify(credentials)
   })
+  // Return from user controller, 'find' function
   .then(res => {
+    // res is a promise
     console.log(res);
+    // Unwrap promise into json.
+    return res.json();
+  })
+}
+
+function update(user) {
+  return fetch(BASE_URL + 'update', {
+    METHOD: 'PUT',
+    headers: {'content-type' : 'application/json'},
+    body: JSON.stringify.apply(user)
+  })
+  .then (res => {
     return res.json();
   })
 }
