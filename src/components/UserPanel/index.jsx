@@ -2,19 +2,6 @@ import React from 'react';
 import './UserPanel.css'
 
 const UserPanel = ( {users} ) => {
-  // const [allUsers, setAllUsers] = useState([]);
-
-  // useEffect(() => {
-
-  //   fetchUsers();
-
-  // }, []);
-
-  // const fetchUsers = async () => {
-  //   const registeredUsers = await userService.index();
-    
-  //   setAllUsers(allUsers => [...allUsers, ...registeredUsers]);
-  // }
 
   return (
     <div className="d-flex flex-column w-100 text-left">
@@ -26,8 +13,9 @@ const UserPanel = ( {users} ) => {
         Online
       </h5>
       <div className="d-flex">
+        {console.log('users in userpanel', users)}
         {users.map(user =>
-        <div className="pl-2" key={user._id}>
+        <div className="pl-2" key={user.id}>
           {user.name}
           </div>
         )}

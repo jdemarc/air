@@ -18,31 +18,37 @@ const Dashboard = ( {user, handleLogout} ) => {
   // Set up socket
   useEffect(() => {
     socket = io(ENDPOINT);
+    
   }, [])
-
+  
   useEffect(() => {
-    // When connecting, assign username and socket id to active user.
     socket.on("connect", () => {
       socket.emit("sign-on", user.name);
     });
-
-    socket.on("users", users => {
-      setUsers(users);
-    });
-
-    socket.on("connected", user => {
+  
+    socket.on("connected", (user) => {
+      console.log('connected socket', user)
       setUsers(users => [...users, user]);
     });
-
-    socket.on("disconnected", id => {
+  
+    socket.on("users", users => {
+      console.log('users socket', users)
+      setUsers(users);
+    });
+    
+    socket.on("disconnected", (id) => {
       setUsers(users => {
-        return users.filter(user => user.id !== id);
+        return users.filter(user => user.id.toString() !== id.toString());
       });
     });
+    
+    return () => {
+      socket.disconnect();
+    }
 
-  }, [])
+  }, [user.name])
 
-  // Get initial messages. Reverse them, and scroll to the bottom of the box.
+  // Message effects.
   useEffect(() => {
     socket.on('init', pastMessages => {
       let reversedPastMessages = pastMessages.reverse();

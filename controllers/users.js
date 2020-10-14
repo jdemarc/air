@@ -8,7 +8,7 @@ module.exports = {
   login,
   index,
   edit,
-  show
+  // show
 };
 
 async function index(req, res) {
@@ -68,9 +68,4 @@ function createJWT(user) {
 async function edit(req, res) {
   const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
   res.status(200).json(updatedPuppy);
-}
-
-async function show(req, res) {
-  const puppy = await Puppy.findById(req.params.id);
-  res.status(200).json(puppy);
 }
