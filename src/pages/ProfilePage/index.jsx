@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import userService from '../../utils/userService';
  
@@ -27,6 +27,7 @@ const ProfilePage = ( { user, history } ) => {
       html: `<input type="text" id="email" class="swal2-input" placeholder="Email">
       <input type="password" id="password" class="swal2-input" placeholder="Password">`,
       confirmButtonText: 'Sign in',
+      showCancelButton: true,
       cancelButtonText: 'Nevermind',
       focusConfirm: false,
 
@@ -64,6 +65,7 @@ const ProfilePage = ( { user, history } ) => {
             </svg>
 
             <div>{user.email}</div>
+            {console.log(email, password, status)}
 
             <div onClick={(e) => handleSwalClick(e)}>
                 <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-gear mt-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -71,8 +73,12 @@ const ProfilePage = ( { user, history } ) => {
                   <path fillRule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
                 </svg>
             </div>
-              {/* <Link to='/edit-profile'>
-              </Link> */}
+
+            {status === 'OK' 
+              ? <Redirect to='/edit-profile' history={history} user={user} />
+              : null
+            }
+
             <Link to='/dashboard'>
               <button className="btn btn-primary mt-3"> Return </button>
             </Link>
