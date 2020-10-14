@@ -5,18 +5,18 @@ import userService from '../../utils/userService';
  
 
 const ProfilePage = ( { user, history } ) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('');
 
   const validateUser = async (credentials) => {
-    try {
-      await userService.login(credentials);
-      setStatus('OK');
-
-    } catch (error) {
-      setStatus('BAD');
-    }
+      const response = await userService.verify(credentials);
+      console.log('Response', response);
+      if (response.status === 200) {
+        setStatus('OK')
+      } else {
+        setStatus('BAD')
+      }
   }
 
   const handleSwalClick = (e) => {
@@ -24,33 +24,35 @@ const ProfilePage = ( { user, history } ) => {
 
     Swal.fire({
       title: 'Enter your credentials',
-      html: `<input type="text" id="email" class="swal2-input" placeholder="Email">
-      <input type="password" id="password" class="swal2-input" placeholder="Password">`,
+      html: `<input type="password" id="password" class="swal2-input" placeholder="Password">`,
       confirmButtonText: 'Sign in',
       showCancelButton: true,
       cancelButtonText: 'Nevermind',
       focusConfirm: false,
 
       preConfirm: () => {
-        const email = Swal.getPopup().querySelector('#email').value
         const password = Swal.getPopup().querySelector('#password').value
-        if (!email || !password) {
-          Swal.showValidationMessage(`Please enter an email and password`)
+        if (!password) { // if (!email || !password)
+          Swal.showValidationMessage(`Please enter your password`)
         }
-        return({email, password})
+        return( {password} )
       }
 
     }).then((result) => {
 
-      setEmail(result.value.email);
-      setPassword(result.value.password);
+      // setEmail(result.value.email);
+      if (result.value) {
+        setPassword(result.value.password);
 
-      const credentials = {
-        email: result.value.email,
-        password: result.value.password
+        const credentials = {
+          email,
+          password: result.value.password
+        }
+  
+        validateUser(credentials);
+      } else {
+        Swal.close();
       }
-
-      validateUser(credentials);
     })
   }
 
@@ -65,7 +67,7 @@ const ProfilePage = ( { user, history } ) => {
             </svg>
 
             <div>{user.email}</div>
-            {console.log(email, password, status)}
+            {console.log(password, status)}
 
             <div onClick={(e) => handleSwalClick(e)}>
                 <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-gear mt-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

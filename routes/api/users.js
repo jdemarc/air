@@ -3,7 +3,7 @@ const router = express.Router();
 const usersCtrl = require('../../controllers/users');
 
 router.get('/', usersCtrl.index);
-// router.post('/find', usersCtrl.find);
+router.post('/find', usersCtrl.find);
 
 router.post('/update', usersCtrl.update);
 

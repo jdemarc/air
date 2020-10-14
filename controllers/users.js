@@ -18,20 +18,28 @@ async function index(req, res) {
 
 async function find(req, res) {
   console.log(req.body);
+  const user = await User.findOne({email: req.body.email});
+
   try {
-    const user = await User.findOne({email: req.body.email})
-
-    if (!user) return res.status(401).json({err: 'E-mail not found.'})
-
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
-        res.json({err: 'User found!'});
+        res.json({
+          err: 'User found!',
+          status: 200
+        });
       } else {
-        return res.status(401).json({err: 'Bad credentials in find.'});
+        return res.json({
+          err: 'Bad credentials in find.',
+          status: 401
+        });
       }
     });
   } catch (error) {
-    return res.status(400).json(error);
+    console.log(error);
+    return res.json({
+      err: error,
+      status: 400,
+    })
   }
 }
 
@@ -67,7 +75,12 @@ async function login(req, res) {
       }
     });
   } catch (error) {
-    return res.status(400).json(error);
+    const response = {
+      error,
+      status: 400
+    }
+
+    return res.json(response);
   }
 }
 

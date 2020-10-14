@@ -54,15 +54,13 @@ function login(credentials) {
 }
 
 function verify(credentials) {
-  console.log('Good!', credentials);
-
-  return fetch(`${BASE_URL} + login`, {
+  return fetch(BASE_URL + 'find', {
     method: 'POST',
     headers: {'content-type': 'application/json'},
     body: JSON.stringify(credentials)
   })
   .then(res => {
-    console.log(res.status);
-    return res.status;
+    console.log(res);
+    return res.json();
   })
 }

@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const ProfileEditForm = ( {user} ) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
+
+  const handleUpdateProfile = () => {}
+  
 
   return (
     <div className="d-flex justify-content-center mt-5">
@@ -26,19 +33,35 @@ const ProfileEditForm = ( {user} ) => {
             <div className="d-flex flex-column">
             <div className="col">
                 <input className="mt-4 mb-4"
+                  text="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="Display name"
                 />
 
                 <input className="mt-3 mb-3"
+                  type="email"
+                  name="email"
                   placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <input className="mt-3"
+                  type="password"
+                  name="password"
                   placeholder="New password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
 
                 <input className=""
+                  type="password"
+                  name="passwordConfirm"
                   placeholder="Confirm password"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
                 />
             </div>
           </div>
