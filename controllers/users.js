@@ -7,13 +7,32 @@ module.exports = {
   signup,
   login,
   index,
-  edit,
-  // show
+  update,
+  find
 };
 
 async function index(req, res) {
   const users = await User.find({});
   res.status(200).json(users);
+}
+
+async function find(req, res) {
+  console.log(req.body);
+  try {
+    const user = await User.findOne({email: req.body.email})
+
+    if (!user) return res.status(401).json({err: 'E-mail not found.'})
+
+    user.comparePassword(req.body.password, (err, isMatch) => {
+      if (isMatch) {
+        res.json({err: 'User found!'});
+      } else {
+        return res.status(401).json({err: 'Bad credentials in find.'});
+      }
+    });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 }
 
 async function signup(req, res) {
@@ -52,6 +71,28 @@ async function login(req, res) {
   }
 }
 
+async function update(req, res) {
+  try {
+    const user = await User.findOne({email: req.body.email});
+
+    if (!user) return res.status(401).json({err: 'bad credentials'});
+    
+    user.comparePassword(req.body.password, (err, isMatch) => {
+      if (isMatch) {
+
+        //Update user here
+
+
+        const token = createJWT(user);
+        res.json({token});
+      } else {
+        return res.status(401).json({err: 'bad credentials'});
+      }
+    });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+}
 //------------------------------
 // Functions that do not get exported... helpers
 
@@ -63,9 +104,4 @@ function createJWT(user) {
     { expiresIn: '24h' } // Unspecified... forever
     // Sliding expiration? Refresh token upon login.
   );
-}
-
-async function edit(req, res) {
-  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
-  res.status(200).json(updatedPuppy);
 }
