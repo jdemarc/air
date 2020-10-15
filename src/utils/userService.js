@@ -80,6 +80,7 @@ function update(user) {
     body: JSON.stringify(user)
   })
   .then(res => {
+    console.log('User service res', res)
     return res.json();
   })
 }

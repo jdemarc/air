@@ -92,16 +92,21 @@ async function login(req, res) {
 async function update(req, res) {
 
   const updatedUser = {}
+
   if (req.body.name) updatedUser.name = req.body.name;
   if (req.body.email) updatedUser.email = req.body.email;
   if (req.body.password) updatedUser.password = req.body.password;
 
-  await User.findOneAndUpdate( {_id: req.body.id}, updatedUser, function(err, user) {
-    if (err) console.log(err);
-  });
+  try {
+    const user = await User.findOneAndUpdate( {_id: req.body.id}, updatedUser, function(err, user) {
+      if (err) return res.json(user);
 
-  return res.json();
+    });
+    res.json(user); // This fixed it...
 
+  } catch (error) {
+    return res.status(400).json();
+  }
 }
 //------------------------------
 // Functions that do not get exported... helpers

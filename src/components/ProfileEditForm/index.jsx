@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import userService from '../../utils/userService';
 
-const ProfileEditForm = ( {user} ) => {
+const ProfileEditForm = ( { user, history } ) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,14 +25,23 @@ const ProfileEditForm = ( {user} ) => {
   const handleUpdateUser = async (updatedUser) => {
     try {
       await userService.update(updatedUser);
+      Swal.fire({
+        icon: 'success',
+        title: 'Profile saved.'
+      })
+
+      history.push('/profile');
+
     } catch (error) {
-      console.log('Update user error', error) // TO FIX
+      Swal.fire({
+        icon: 'warning',
+        title: 'Something went wrong...'
+      })
     }
   }
   
   const isFormInvalid = () => {
-    return (!password || !passwordConfirm) || 
-    (password !== passwordConfirm)
+    return (password !== passwordConfirm)
   };
 
   return (
@@ -93,7 +103,7 @@ const ProfileEditForm = ( {user} ) => {
             </div>
               <div className="d-flex justify-content-around align-items-center m-3">
                 <button className="btn btn-primary"
-                  // disabled={isFormInvalid()}
+                  disabled={isFormInvalid()}
                   onClick={(e) => handleSubmit(e)}
                 >Submit</button>
                 

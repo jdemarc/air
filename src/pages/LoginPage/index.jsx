@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
+import Swal from 'sweetalert2';
 import './LoginPage.css';
 
 class LoginPage extends Component {
@@ -26,8 +27,9 @@ class LoginPage extends Component {
 
       this.props.history.push('/dashboard');
     } catch (error) {
-      this.setState({
-        error: 'Invalid credentials.'
+      Swal.fire({
+        icon: 'error',
+        title: 'Your e-mail or password is incorrect.'
       })
     }
   }
@@ -59,9 +61,6 @@ class LoginPage extends Component {
               <button className="btn btn-info btn-block mb-4">Log In</button>
               <Link to='/'>Cancel</Link>
             </form>
-
-            {this.state.error ? <p className="mt-3 text-center text-danger">{this.state.error}</p> : null}
-
           </div>
         </div>
       </div>
