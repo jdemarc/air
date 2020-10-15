@@ -57,17 +57,23 @@ class App extends Component {
           }/>
 
           <Route exact path="/profile" render={({history}) =>
-            <ProfilePage
-              user={this.state.user}
-              history={history}
-            />
+            userService.getUser() ? 
+              <ProfilePage
+                user={this.state.user}
+                history={history}
+              />
+              :
+              <Redirect to='/' />
           }/>
 
           <Route exact path="/edit-profile" render={({history}) =>
-            <ProfileEditForm
-              user={this.state.user}
-              history={history}
-            />
+            userService.getUser() ?
+              <ProfileEditForm
+                user={this.state.user}
+                history={history}
+              />
+              :
+              <Redirect to='/' />
           }/>
 
         </Switch>

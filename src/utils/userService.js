@@ -68,7 +68,6 @@ function verify(credentials) {
   // Return from user controller, 'find' function
   .then(res => {
     // res is a promise
-    console.log(res);
     // Unwrap promise into json.
     return res.json();
   })
@@ -81,8 +80,6 @@ function update(user) {
     body: JSON.stringify(user)
   })
   .then(res => {
-    console.log(res);
     return res.json();
   })
-  // .then(( {token} ) => tokenService.setToken(token));
 }
