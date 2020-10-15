@@ -4,9 +4,9 @@ import userService from '../../utils/userService';
 
 const ProfileEditForm = ( {user} ) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,19 +21,14 @@ const ProfileEditForm = ( {user} ) => {
     handleUpdateUser(updatedUser);
   };
 
-  //async await
   const handleUpdateUser = async (updatedUser) => {
     try {
-      const result = await userService.update(updatedUser);
-      console.log(result);
-      
-    } catch {
-      console.log('issues...')
+      await userService.update(updatedUser);
+    } catch (error) {
+      console.log('Update user error', error) // TO FIX
     }
-    
   }
   
-
   const isFormInvalid = () => {
     return (!password || !passwordConfirm) || 
     (password !== passwordConfirm)
@@ -62,7 +57,7 @@ const ProfileEditForm = ( {user} ) => {
             <div className="d-flex flex-column">
             <div className="col">
                 <input className="mt-4 mb-4"
-                  text="text"
+                  type="text"
                   name="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}

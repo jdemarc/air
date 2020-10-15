@@ -42,8 +42,6 @@ function logout() {
 }
 
 function login(credentials) {
-  console.log(credentials);
-  
   return fetch(BASE_URL + 'login', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),

@@ -1,0 +1,8 @@
+#settings {
+  color: blue
+}
+
+#settings:hover{
+  color: lightskyblue;
+  cursor: pointer;
+}

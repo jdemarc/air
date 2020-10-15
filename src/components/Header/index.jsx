@@ -35,7 +35,7 @@ const Header = ( {user, handleLogout}) => {
 
   return (
       <div className="container rounded-top border border-secondary" id="header">
-        <h1 className="" id="title"> Parley </h1>
+        <h1 className="mt-2" id="title"> Parley </h1>
           {nav}
       </div>
   );
