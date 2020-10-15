@@ -7,7 +7,6 @@ import Dashboard from '../Dashboard';
 import userService from '../../utils/userService';
 import AuthPage from '../AuthPage';
 import ProfilePage from '../ProfilePage';
-import ProfileEditForm from '../../components/ProfileEditForm';
 
 const App = () => {
   const [user, setUser] = useState(userService.getUser());
@@ -61,17 +60,6 @@ const App = () => {
             :
             <Redirect to='/' />
         }/>
-
-        <Route exact path="/edit-profile" render={({history}) =>
-          userService.getUser() ?
-            <ProfileEditForm
-              user={user}
-              history={history}
-            />
-            :
-            <Redirect to='/' />
-        }/>
-
       </Switch>
 
     </div>
