@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import userService from '../../utils/userService';
@@ -112,9 +112,8 @@ const ProfileEditForm = ( { user, history } ) => {
                 </Link>
 
               </div>
-    </div>
-</div>
-          
+            </div>
+          </div>   
   );
 }
 

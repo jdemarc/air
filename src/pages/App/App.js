@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import LoginPage from '../LoginPage';
@@ -9,78 +9,74 @@ import AuthPage from '../AuthPage';
 import ProfilePage from '../ProfilePage';
 import ProfileEditForm from '../../components/ProfileEditForm';
 
-class App extends Component {
+// class App extends Component {}
+const App = () => {
+  const [user, setUser] = useState(null)
 
-  state = {
-    user: userService.getUser(),
+  const handleSignupOrLogin = () => {
+    setUser(userService.getUser())
   }
 
-  handleSignupOrLogin = () => {
-    this.setState({user: userService.getUser()});
-  };
-
-  handleLogout = () => {
+  const handleLogout = () => {
     userService.logout();
-    this.setState({ user: null});
+    setUser(null);
   }
-  
-  render() {
-    return (
-      <div>
-        <Switch>
-          <Route exact path='/' render={() =>
-            <AuthPage />
-          }/>
 
-          <Route exact path='/dashboard' render={() =>
-            userService.getUser() ? 
-              <Dashboard
-                user={this.state.user}
-                handleLogout={this.handleLogout}
-              />
-              :
-              <Redirect to='/' />
-          }/>
+  return (
+    <div>
+      <Switch>
+        <Route exact path='/' render={() =>
+          <AuthPage />
+        }/>
 
-          <Route exact path="/signup" render={({ history }) => 
-            <SignupPage
-              history={history}
-              handleSignupOrLogin={this.handleSignupOrLogin}
+        <Route exact path='/dashboard' render={() =>
+          userService.getUser() ? 
+            <Dashboard
+              user={user}
+              handleLogout={handleLogout}
             />
-          }/>
-  
-          <Route exact path="/login" render={({ history }) => 
-            <LoginPage
+            :
+            <Redirect to='/' />
+        }/>
+
+        <Route exact path="/signup" render={({ history }) => 
+          <SignupPage
+            history={history}
+            handleSignupOrLogin={handleSignupOrLogin}
+          />
+        }/>
+
+        <Route exact path="/login" render={({ history }) => 
+          <LoginPage
+            history={history}
+            handleSignupOrLogin={handleSignupOrLogin}
+          />
+        }/>
+
+        <Route exact path="/profile" render={({history}) =>
+          userService.getUser() ? 
+            <ProfilePage
+              user={user}
               history={history}
-              handleSignupOrLogin={this.handleSignupOrLogin}
             />
-          }/>
+            :
+            <Redirect to='/' />
+        }/>
 
-          <Route exact path="/profile" render={({history}) =>
-            userService.getUser() ? 
-              <ProfilePage
-                user={this.state.user}
-                history={history}
-              />
-              :
-              <Redirect to='/' />
-          }/>
+        <Route exact path="/edit-profile" render={({history}) =>
+          userService.getUser() ?
+            <ProfileEditForm
+              user={user}
+              history={history}
+            />
+            :
+            <Redirect to='/' />
+        }/>
 
-          <Route exact path="/edit-profile" render={({history}) =>
-            userService.getUser() ?
-              <ProfileEditForm
-                user={this.state.user}
-                history={history}
-              />
-              :
-              <Redirect to='/' />
-          }/>
+      </Switch>
 
-        </Switch>
-  
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
