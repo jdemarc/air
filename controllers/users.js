@@ -72,14 +72,16 @@ async function login(req, res) {
     
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
+        // If password is good, generate a token for user.
         const token = createJWT(user);
         res.json({token});
       } else {
-        console.log('Password not working.')
+        // Password does not match
         return res.status(401).json({err: 'bad credentials'});
       }
     });
   } catch (error) {
+    // If a user is not found, send this response back.
     const response = {
       error,
       status: 400
@@ -101,6 +103,8 @@ async function update(req, res) {
     const user = await User.findOneAndUpdate( {_id: req.body.id}, updatedUser, function(err, user) {
       if (err) return res.json(user);
 
+      const token = createJWT(user);
+      res.json({token});
     });
     res.json(user); // This fixed it...
 

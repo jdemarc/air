@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import userService from '../../utils/userService';
 
-const ProfileEditForm = ( { user, history } ) => {
+const ProfileEditForm = ( { user, handleStatus } ) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +20,7 @@ const ProfileEditForm = ( { user, history } ) => {
 
     handleUpdateUser(updatedUser);
   };
-
+  
   const handleUpdateUser = async (updatedUser) => {
     try {
       await userService.update(updatedUser);
@@ -30,14 +29,14 @@ const ProfileEditForm = ( { user, history } ) => {
         title: 'Profile saved.'
       })
 
-      history.push('/profile');
-
+      
     } catch (error) {
       Swal.fire({
         icon: 'warning',
         title: 'Something went wrong...'
       })
-    }
+    } 
+    handleStatus();
   }
   
   const isFormInvalid = () => {
@@ -64,56 +63,55 @@ const ProfileEditForm = ( { user, history } ) => {
               </svg>
 
             </div>
-            <div className="d-flex flex-column">
-            <div className="col">
-                <input className="mt-4 mb-4"
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Display name"
-                />
+              <div className="d-flex flex-column">
+                <div className="col">
+                  <input className="mt-4 mb-4"
+                    type="text"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Display name"
+                  />
 
-                <input className="mt-3 mb-3"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                  <input className="mt-3 mb-3"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
 
-                <input className="mt-3"
-                  type="password"
-                  name="password"
-                  placeholder="New password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                  <input className="mt-3"
+                    type="password"
+                    name="password"
+                    placeholder="New password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
 
-                <input className=""
-                  type="password"
-                  name="passwordConfirm"
-                  placeholder="Confirm password"
-                  value={passwordConfirm}
-                  onChange={(e) => setPasswordConfirm(e.target.value)}
-                />
-            </div>
-          </div>
-
-            </div>
-              <div className="d-flex justify-content-around align-items-center m-3">
-                <button className="btn btn-primary"
-                  disabled={isFormInvalid()}
-                  onClick={(e) => handleSubmit(e)}
-                >Submit</button>
-                
-                <Link to='/profile'>
-                  <button className="btn btn-primary">Back</button>
-                </Link>
+                  <input className=""
+                    type="password"
+                    name="passwordConfirm"
+                    placeholder="Confirm password"
+                    value={passwordConfirm}
+                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                  />
+                </div>
+              </div>
 
               </div>
-            </div>
-          </div>   
+                <div className="d-flex justify-content-around align-items-center m-3">
+                  <button className="btn btn-primary"
+                    disabled={isFormInvalid()}
+                    onClick={(e) => handleSubmit(e)}>Submit</button>
+                
+                  <button 
+                    className="btn btn-primary"
+                    onClick={() => handleStatus()}
+                  >Back</button>
+                </div>
+              </div>
+    </div>   
   );
 }
 

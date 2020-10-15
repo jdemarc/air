@@ -80,7 +80,8 @@ function update(user) {
     body: JSON.stringify(user)
   })
   .then(res => {
-    console.log('User service res', res)
-    return res.json();
+    if (res.ok) return res.json();
+    throw new Error('Update failed.');
   })
+  .then(({token}) => tokenService.setToken(token));
 }

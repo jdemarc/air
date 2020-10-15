@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import LoginPage from '../LoginPage';
@@ -9,12 +9,11 @@ import AuthPage from '../AuthPage';
 import ProfilePage from '../ProfilePage';
 import ProfileEditForm from '../../components/ProfileEditForm';
 
-// class App extends Component {}
 const App = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(userService.getUser());
 
   const handleSignupOrLogin = () => {
-    setUser(userService.getUser())
+    setUser(userService.getUser());
   }
 
   const handleLogout = () => {
