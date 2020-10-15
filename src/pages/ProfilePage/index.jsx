@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import userService from '../../utils/userService';
@@ -37,7 +37,7 @@ const ProfilePage = ( { user, history } ) => {
 
       preConfirm: () => {
         const password = Swal.getPopup().querySelector('#password').value
-        if (!password) { // if (!email || !password)
+        if (!password) {
           Swal.showValidationMessage(`Please enter your password`)
         }
         return( {password} )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import userService from '../../utils/userService';
 
 class SignupForm extends Component {
@@ -31,7 +32,10 @@ class SignupForm extends Component {
       // Successful sign-in 'redirects' to dashboard.
       this.props.history.push('/dashboard');
     } catch (error) {
-      this.props.updateMessage(error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'This e-mail has been taken.'
+      })
     }
   }
   
