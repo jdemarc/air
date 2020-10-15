@@ -11,7 +11,6 @@ const ProfilePage = ( { user, history } ) => {
 
   const validateUser = async (credentials) => {
       const response = await userService.verify(credentials);
-      console.log('Response', response);
       if (response.status === 200) {
         setStatus('OK')
       } else {

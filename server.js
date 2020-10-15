@@ -27,11 +27,14 @@ app.use(express.json());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
+
 // Routes
 app.use('/api/users', require('./routes/api/users'));
 
-// Mount auth middleware to process JWTs.
+//Only process tokens for below routes.
+
 app.use(require('./config/auth'));
+// Mount auth middleware to process JWTs.
 app.use('/api/messages', require('./routes/api/messages.js'));
 
 

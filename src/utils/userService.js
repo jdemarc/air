@@ -6,7 +6,8 @@ export default {
   logout,
   login,
   index,
-  verify
+  verify,
+  update,
 };
 
 const BASE_URL = '/api/users/';
@@ -41,6 +42,8 @@ function logout() {
 }
 
 function login(credentials) {
+  console.log(credentials);
+  
   return fetch(BASE_URL + 'login', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
@@ -75,11 +78,13 @@ function verify(credentials) {
 
 function update(user) {
   return fetch(BASE_URL + 'update', {
-    METHOD: 'PUT',
-    headers: {'content-type' : 'application/json'},
-    body: JSON.stringify.apply(user)
+    method: 'PUT',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify(user)
   })
-  .then (res => {
+  .then(res => {
+    console.log(res);
     return res.json();
   })
+  // .then(( {token} ) => tokenService.setToken(token));
 }

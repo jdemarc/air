@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import userService from '../../utils/userService';
 
 const ProfileEditForm = ( {user} ) => {
   const [name, setName] = useState('');
@@ -10,21 +11,26 @@ const ProfileEditForm = ( {user} ) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(e.target);
-
     const updatedUser = {
       name,
       email,
-      password
+      password,
+      id: user._id
     }
 
     handleUpdateUser(updatedUser);
   };
 
   //async await
-  const handleUpdateUser = (updatedUser) => {
-    console.log(updatedUser)
-    console.log('handleUser()')
+  const handleUpdateUser = async (updatedUser) => {
+    try {
+      const result = await userService.update(updatedUser);
+      console.log(result);
+      
+    } catch {
+      console.log('issues...')
+    }
+    
   }
   
 

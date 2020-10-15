@@ -67,14 +67,17 @@ async function login(req, res) {
   try {
     //Only looking for one -- find returns an Array.
     const user = await User.findOne({email: req.body.email});
-    
+    console.log(user);
+
     if (!user) return res.status(401).json({err: 'bad credentials'});
     
+    console.log(req.body.password);
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
         const token = createJWT(user);
         res.json({token});
       } else {
+        console.log('Password not working.')
         return res.status(401).json({err: 'bad credentials'});
       }
     });
@@ -89,10 +92,18 @@ async function login(req, res) {
 }
 
 async function update(req, res) {
-  console.log(req.body);
-  
-    const user = await User.findOne({email: req.body.email});
 
+  await User.findOneAndUpdate( {_id: req.body.id}, {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  }, function(err, user) {
+    console.log('findByOneAndUpdate', user);
+  });
+
+  return res.json();
+
+  // await user.save()
 
 }
 //------------------------------

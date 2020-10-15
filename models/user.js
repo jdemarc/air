@@ -47,9 +47,20 @@ userSchema.pre('save', function(next) {
   });
 });
 
+userSchema.pre('findOneAndUpdate', async function(next) {
+  const user = await this.getUpdate();
+  
+  const hash = await bcrypt.hash(user.password, SALT_ROUNDS);
+
+  user.password = hash;
+
+  next();
+});
+
 // Instance method -- callable on the document itself.
 userSchema.methods.comparePassword = function(tryPassword, cb) {
   // Compare passed password with document's password.
+
   bcrypt.compare(tryPassword, this.password, cb);
 };
 
