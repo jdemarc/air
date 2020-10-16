@@ -50,11 +50,10 @@ userSchema.pre('save', function(next) {
 userSchema.pre('findOneAndUpdate', async function(next) {
   const user = await this.getUpdate();
 
- // Possible source of error.
-  if (!user.password) next();
-  
-  const hash = await bcrypt.hash(user.password, SALT_ROUNDS);
-  user.password = hash;
+  if(user.password) {
+    const hash = await bcrypt.hash(user.password, SALT_ROUNDS);
+    user.password = hash;
+  } 
   next();
 });
 

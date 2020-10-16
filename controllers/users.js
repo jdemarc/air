@@ -18,7 +18,7 @@ async function index(req, res) {
 
 async function find(req, res) {
   // Find user by e-mail using req.body created in userService fetch
-  const user = await User.findOne({email: req.body.email});
+  const user = await User.findById(req.body.id);
 
   try {
     user.comparePassword(req.body.password, (err, isMatch) => {
@@ -65,6 +65,7 @@ async function signup(req, res) {
 
 async function login(req, res) {
   try {
+    
     //Only looking for one -- find returns an Array.
     const user = await User.findOne({email: req.body.email});
 
@@ -102,16 +103,18 @@ async function update(req, res) {
   try {
     const user = await User.findOneAndUpdate( {_id: req.body.id}, updatedUser, function(err, user) {
       if (err) return res.json(user);
-
-      const token = createJWT(user);
-      res.json({token});
     });
-    res.json(user); // This fixed it...
+    
+    const token = createJWT(user);
+    return res.json({token});
 
   } catch (error) {
+    console.log('FindOneAndUpdate error: ', error)
     return res.status(400).json();
   }
 }
+
+
 //------------------------------
 // Functions that do not get exported... helpers
 

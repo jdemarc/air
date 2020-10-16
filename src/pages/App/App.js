@@ -4,9 +4,9 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import LoginPage from '../LoginPage';
 import SignupPage from '../SignupPage';
 import Dashboard from '../Dashboard';
-import userService from '../../utils/userService';
 import AuthPage from '../AuthPage';
 import ProfilePage from '../ProfilePage';
+import userService from '../../utils/userService';
 
 const App = () => {
   const [user, setUser] = useState(userService.getUser());
@@ -56,6 +56,7 @@ const App = () => {
             <ProfilePage
               user={user}
               history={history}
+              handleSignupOrLogin={handleSignupOrLogin}
             />
             :
             <Redirect to='/' />

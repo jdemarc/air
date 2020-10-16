@@ -34,6 +34,7 @@ function signup(user) {
   // equivalent to then((token) => token.token)
 
 function getUser() {
+  console.log('hitting get user');
   return tokenService.getUserFromToken();
 }
 

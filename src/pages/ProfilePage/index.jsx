@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2'
 import ProfileEditForm from '../../components/ProfileEditForm';
-import userService from '../../utils/userService';
 import Profile from '../../components/Profile';
 import './ProfilePage.css'
+import userService from '../../utils/userService';
  
 
-const ProfilePage = ( { user, history } ) => {
+const ProfilePage = ( { user, handleSignupOrLogin } ) => {
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(null);
 
   const validateUser = async (credentials) => {
+    // Check if the user is in the database.
       const response = await userService.verify(credentials);
       if (response.status === 200) {
         setStatus('OK');
@@ -50,6 +51,7 @@ const ProfilePage = ( { user, history } ) => {
         setPassword(result.value.password);
 
         const credentials = {
+          id: user._id,
           email,
           password: result.value.password
         }
@@ -74,10 +76,9 @@ const ProfilePage = ( { user, history } ) => {
     :
       <ProfileEditForm
         user={user}
-        history={history}
         handleStatus={handleStatus}
+        handleSignupOrLogin={handleSignupOrLogin}
       />
-
 
 return (
   <div>

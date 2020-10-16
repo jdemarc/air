@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const Profile = ( {user, handleSwalClick} ) => {
+
   return (
     <div className="d-flex justify-content-center align-items-center mt-5">
     <div className="card" style={{width: '30rem'}}>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import userService from '../../utils/userService';
 
-const ProfileEditForm = ( { user, handleStatus } ) => {
+const ProfileEditForm = ( { user, handleStatus, handleSignupOrLogin } ) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,11 +24,12 @@ const ProfileEditForm = ( { user, handleStatus } ) => {
   const handleUpdateUser = async (updatedUser) => {
     try {
       await userService.update(updatedUser);
+      
       Swal.fire({
         icon: 'success',
         title: 'Profile saved.'
       })
-
+      
       
     } catch (error) {
       Swal.fire({
@@ -36,6 +37,8 @@ const ProfileEditForm = ( { user, handleStatus } ) => {
         title: 'Something went wrong...'
       })
     } 
+    
+    handleSignupOrLogin();
     handleStatus();
   }
   
