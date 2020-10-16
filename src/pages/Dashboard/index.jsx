@@ -8,7 +8,8 @@ import messageService from '../../utils/messageService';
 import './Dashboard.css';
 
 let socket;
-const ENDPOINT = 'http://localhost:3000/'
+// const ENDPOINT = 'http://localhost:3000/'
+const ENDPOINT = 'https://parley-chat.herokuapp.com/'
 
 const Dashboard = ( {user, handleLogout} ) => {
   const [message, setMessage] = useState('');
