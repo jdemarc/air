@@ -1,6 +1,5 @@
 const io = require('socket.io')();
 const Message = require('../models/message');
-//const messageCtrl = require('../controllers/messages')
 
 const users = {};
 
