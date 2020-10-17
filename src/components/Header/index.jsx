@@ -5,7 +5,7 @@ import './Header.css'
 const Header = ( {user, handleLogout}) => {
   
   let nav = user ?
-    <div className="navbar-nav flex-row justify-content-around align-items-center p-2">
+    <div className="d-flex flex-row justify-content-around align-items-center p-2">
         <span>Signed in as {user.name}
           <Link to={"/profile"}>
             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" className="bi bi-pen" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@ const Header = ( {user, handleLogout}) => {
     </ul>;
 
   return (
-      <div className="container rounded-top border border-secondary" id="header">
+      <div className="container-fluid rounded-top border border-secondary" id="header">
         <h1 className="mt-2" id="title"> Parley </h1>
           {nav}
       </div>

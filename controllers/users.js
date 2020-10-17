@@ -109,7 +109,6 @@ async function update(req, res) {
     return res.json({token});
 
   } catch (error) {
-    console.log('FindOneAndUpdate error: ', error)
     return res.status(400).json();
   }
 }

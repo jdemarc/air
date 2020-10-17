@@ -29,11 +29,11 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 
 // Routes
+app.use(require('./config/auth'));
 app.use('/api/users', require('./routes/api/users'));
 
 //Only process tokens for below routes.
 
-app.use(require('./config/auth'));
 // Mount auth middleware to process JWTs.
 app.use('/api/messages', require('./routes/api/messages.js'));
 

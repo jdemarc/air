@@ -34,7 +34,6 @@ function signup(user) {
   // equivalent to then((token) => token.token)
 
 function getUser() {
-  console.log('hitting get user');
   return tokenService.getUserFromToken();
 }
 
@@ -62,7 +61,10 @@ function verify(credentials) {
   return fetch(BASE_URL + 'find', {
     method: 'POST',
     // Understand types of data being sent
-    headers: {'content-type': 'application/json'},
+    headers: new Headers({
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken()
+    }),
     // req.body
     body: JSON.stringify(credentials)
   })
@@ -77,7 +79,10 @@ function verify(credentials) {
 function update(user) {
   return fetch(BASE_URL + 'update', {
     method: 'PUT',
-    headers: {'content-type': 'application/json'},
+    headers: new Headers({
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken()
+    }),
     body: JSON.stringify(user)
   })
   .then(res => {
