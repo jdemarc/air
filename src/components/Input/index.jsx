@@ -12,6 +12,7 @@ const Input = ({message, setMessage, handleSubmit}) => {
           placeholder="Type your message"
           value={message}
           name="message"
+          autoComplete="off"
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' ? handleSubmit(e) : null}
           />
