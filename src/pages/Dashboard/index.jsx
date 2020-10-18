@@ -21,6 +21,7 @@ const Dashboard = ( {user, handleLogout} ) => {
     socket = io(ENDPOINT);
   }, [])
   
+  // Socket effects.
   useEffect(() => {
     socket.on("connect", () => {
       socket.emit("sign-on", user.name);
@@ -93,7 +94,6 @@ const Dashboard = ( {user, handleLogout} ) => {
     const chat = document.getElementById('chatbox');
     chat.scrollTop = chat.scrollHeight;
   }
-
 
   return (
     <div className="dashboard-container">

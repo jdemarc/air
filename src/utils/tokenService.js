@@ -7,8 +7,6 @@ export default {
 
 function setToken(token) {
   if (token) {
-    // Local storage is a built-in web API in every browser.
-    // Used for persisting data in a browser.
     localStorage.setItem('token', token);
   } else {
     localStorage.removeItem('token');

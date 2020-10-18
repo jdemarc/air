@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
 import Swal from 'sweetalert2';
-import './LoginPage.css';
 
 class LoginPage extends Component {
   state = {

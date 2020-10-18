@@ -14,7 +14,7 @@ class SignupForm extends Component {
   handleChange = (e) => {
     this.props.updateMessage('');
 
-    //Using computed property name syntax
+    // Using computed property name syntax
     this.setState({
       [e.target.name]: e.target.value
     });

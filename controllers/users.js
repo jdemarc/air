@@ -17,16 +17,11 @@ async function index(req, res) {
 }
 
 async function find(req, res) {
-  // Find user by e-mail using req.body created in userService fetch
   const user = await User.findById(req.body.id);
 
   try {
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
-        // res -- built into Express
-        // represents HTTP response
-        // .json lets you send back a json.
-        // Build your own json >>
         res.json({
           err: 'User found!',
           status: 200
@@ -39,7 +34,6 @@ async function find(req, res) {
       }
     });
   } catch (error) {
-    console.log(error);
     return res.json({
       err: error,
       status: 400,
@@ -53,10 +47,8 @@ async function signup(req, res) {
   try {
     await user.save();
 
-    // String
     const token = createJWT(user);
 
-    // Send back an object with property of 'token', value is the string.
     res.json({ token });
   } catch (error) {
     res.status(400).json(error);
@@ -65,24 +57,19 @@ async function signup(req, res) {
 
 async function login(req, res) {
   try {
-    
-    //Only looking for one -- find returns an Array.
     const user = await User.findOne({email: req.body.email});
 
     if (!user) return res.status(401).json({err: 'bad credentials'});
     
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
-        // If password is good, generate a token for user.
         const token = createJWT(user);
         res.json({token});
       } else {
-        // Password does not match
         return res.status(401).json({err: 'bad credentials'});
       }
     });
   } catch (error) {
-    // If a user is not found, send this response back.
     const response = {
       error,
       status: 400
@@ -113,16 +100,12 @@ async function update(req, res) {
   }
 }
 
-
-//------------------------------
-// Functions that do not get exported... helpers
+// JWT Helper
 
 function createJWT(user) {
-  //args: data payload, secret, (options/optional)
   return jwt.sign(
-    { user }, // { user: user }
+    { user },
     SECRET,
-    { expiresIn: '24h' } // Unspecified... forever
-    // Sliding expiration? Refresh token upon login.
+    { expiresIn: '24h' }
   );
 }

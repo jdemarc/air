@@ -17,7 +17,6 @@ function index() {
   .then(res=>res.json());
 }
 
-// user from form -- the state.
 function signup(user) {
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
@@ -28,10 +27,8 @@ function signup(user) {
     if (res.ok) return res.json();
     throw new Error('E-mail already taken.');
   })
-  // Token is the object returned from the fetch.
   .then(({ token }) => tokenService.setToken(token));
 }
-  // equivalent to then((token) => token.token)
 
 function getUser() {
   return tokenService.getUserFromToken();
@@ -56,8 +53,6 @@ function login(credentials) {
 
 // Verify password
 function verify(credentials) {
-  // 1st argument is route -- /api/users/find
-  // return to where verify is being called in front end
   return fetch(BASE_URL + 'find', {
     method: 'POST',
     // Understand types of data being sent
@@ -68,10 +63,7 @@ function verify(credentials) {
     // req.body
     body: JSON.stringify(credentials)
   })
-  // Return from user controller, 'find' function
   .then(res => {
-    // res is a promise
-    // Unwrap promise into json.
     return res.json();
   })
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './AuthPage.css'
 
 const AuthPage = () => {
+  
   return (
     <div className="primary-container">
       <div className="card" style={{width: '30rem'}}>

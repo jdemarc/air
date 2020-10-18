@@ -12,6 +12,6 @@ hr {
   color: lightgray;
 }
 
-/* #message-row:nth-child(2n){
-  background: lightgray
-} */
+#message-row:nth-child(2n){
+  background: #f4f4f4;
+}
